@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings - HallBooking</title>
+    <link rel="stylesheet" href="history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                <span>HallBooking</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="history.html" class="active"><i class="fas fa-calendar-alt"></i> Your Bookings</a></li>
+<li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="homepage.html"><i class="fas fa-chevron-left"></i> Back to home</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="header-container">
+            <div class="header-icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h1>Your Bookings</h1>
+            <p>View and manage all your hall reservations in one place</p>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card total">
+                <div class="stat-progress">
+                    <svg viewBox="0 0 36 36">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" id="totalCircle" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalBookings">0</span>
+                    <span class="stat-label">Total Bookings</span>
+                </div>
+            </div>
+            <div class="stat-card upcoming">
+                <div class="stat-progress">
+                    <svg viewBox="0 0 36 36">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" id="upcomingCircle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="upcomingBookings">0</span>
+                    <span class="stat-label">Upcoming</span>
+                </div>
+            </div>
+            <div class="stat-card completed">
+                <div class="stat-progress">
+                    <svg viewBox="0 0 36 36">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" id="completedCircle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="completedBookings">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bookings List -->
+    <section class="history-container">
+        <div class="section-header">
+            <div class="section-title">
+                <h2><i class="fas fa-history"></i> Booking History</h2>
+                <span class="booking-count" id="bookingCount">0 bookings</span>
+            </div>
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-filter="all">
+                    <i class="fas fa-th-large"></i> All
+                </button>
+                <button class="tab-btn" data-filter="upcoming">
+                    <i class="fas fa-hourglass-half"></i> Upcoming
+                </button>
+                <button class="tab-btn" data-filter="past">
+                    <i class="fas fa-check-double"></i> Completed
+                </button>
+            </div>
+        </div>
+        <div id="bookings-list" class="bookings-list"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i class="fas fa-building"></i>
+                    <span>HallBooking</span>
+                </div>
+                <p>Your trusted partner for hall reservations across Malaysia</p>
+            </div>
+            <div class="footer-links">
+                <a href="homepage.html">Home</a>
+                <a href="history.html">Your Bookings</a>
+<a href="#">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 HallBooking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="history.js"></script>
+</body>
+</html>
+
