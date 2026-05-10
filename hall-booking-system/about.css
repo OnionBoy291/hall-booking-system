@@ -1,0 +1,417 @@
+/* ============================================
+   ABOUT PAGE - Match homepage/history styling
+   (structure in about.html kept: nav, hero, team members, introduction)
+   ============================================ */
+
+/* CSS Variables (same palette as other pages) */
+:root {
+    --primary: #FFD900;
+    --primary-light: #BFA600;
+    --primary-dark: #E6C200;
+
+    --accent: #2C2C54;
+    --accent-hover: #3A3A6A;
+
+    --text-muted: #C0C0C0;
+    --text: #ffffff;
+
+    --card: #3A3A6A;
+    --border: rgba(192, 192, 192, 0.2);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: var(--accent);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   NAVBAR (about.html uses <nav>, <a>, .active)
+   ============================================ */
+nav.navbar {
+    background: #2C2C54;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo i {
+    font-size: 1.75rem;
+    opacity: 0.95;
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+}
+
+nav .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+nav .nav-links a:hover {
+    color: var(--primary);
+    background: rgba(255, 217, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+nav .nav-links a.active {
+    color: var(--primary);
+    background: rgba(255, 217, 0, 0.15);
+    font-weight: 600;
+}
+
+/* ============================================
+   HERO SECTION
+   (about.html uses: section.hero -> h1 + p)
+   ============================================ */
+.hero {
+    position: relative;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    background: linear-gradient(135deg, #2C2C54 0%, #1A1A3E 50%, #2C2C54 100%);
+    overflow: hidden;
+    border-bottom: 1px solid rgba(192,192,192,0.15);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -10%;
+    width: 520px;
+    height: 520px;
+    background: rgba(255,217,0,0.03);
+    border-radius: 50%;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -35%;
+    left: -8%;
+    width: 420px;
+    height: 420px;
+    background: rgba(255,217,0,0.03);
+    border-radius: 50%;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    opacity: 0.85;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+}
+
+/* ============================================
+   TEAM MEMBERS
+   (about.html uses: section.team-section -> .team-container -> .member-card)
+   ============================================ */
+.team-section {
+    padding: 4.5rem 2rem 2.5rem;
+}
+
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.member-card {
+    width: 260px;
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.75rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(192,192,192,0.2);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 217, 0, 0.0);
+    transition: var(--transition);
+}
+
+.member-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.member-card:hover::before {
+    background: var(--primary);
+}
+
+.image-placeholder {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: rgba(255, 217, 0, 0.08);
+    border: 1px solid rgba(255, 217, 0, 0.25);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* prevents the image from covering the whole card */
+}
+
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fit image into circular space */
+    display: block;
+}
+
+/* Hide the dashed placeholder ring when an image is present */
+.image-placeholder:has(img)::after {
+    display: none;
+}
+
+/* Keep placeholders neutral if no image is provided */
+.image-placeholder::after {
+    content: ' ';
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 217, 0, 0.35);
+}
+
+
+.member-card h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+}
+
+.member-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+}
+
+/* Add subtle distinction between the two lines */
+.member-card p:nth-of-type(2) {
+    color: rgba(192,192,192,0.95);
+}
+
+/* ============================================
+   PROJECT INTRODUCTION
+   (about.html uses: section.project-intro -> h2 + p)
+   ============================================ */
+.project-intro {
+    padding: 3.5rem 2rem 4.5rem;
+    text-align: center;
+}
+
+.project-intro h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+    position: relative;
+}
+
+.project-intro h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 120px;
+    height: 3px;
+    background: rgba(255, 217, 0, 0.85);
+    border-radius: 50px;
+}
+
+.project-intro p {
+    max-width: 850px;
+    margin: 0 auto;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+/* ============================================
+   FOOTER (homepage-like)
+   ============================================ */
+.footer {
+    background: #2C2C54;
+    color: #ffffff;
+    margin-top: 4rem;
+    padding: 3rem 2rem 1rem;
+    border-top: 1px solid rgba(192,192,192,0.2);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #FFD900;
+}
+
+.footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.footer-section p {
+    color: #C0C0C0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #C0C0C0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #FFD900;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(192,192,192,0.2);
+    color: #C0C0C0;
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem 1.25rem;
+    }
+
+    .hero {
+        padding: 3.5rem 1.5rem 3rem;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .team-section {
+        padding: 3.5rem 1.5rem 2rem;
+    }
+
+    .member-card {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .project-intro {
+        padding: 2.75rem 1.5rem 3.5rem;
+    }
+}
+

@@ -756,56 +756,66 @@ body {
 }
 
 /* ============================================
-   FOOTER
+   FOOTER (homepage-like)
    ============================================ */
 .footer {
     background: #2C2C54;
     color: #ffffff;
-    margin-top: 2rem;
-    padding: 3rem 2rem 1.5rem;
+    margin-top: 4rem;
+    padding: 3rem 2rem 1rem;
     border-top: 1px solid rgba(192,192,192,0.2);
 }
 
 .footer-content {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
 }
 
-.footer-brand .logo {
-    margin-bottom: 0.75rem;
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #FFD900;
 }
 
-.footer-brand p {
+.footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.footer-section p {
     color: #C0C0C0;
     font-size: 0.9rem;
-    max-width: 300px;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
 }
 
-.footer-links {
-    display: flex;
-    gap: 2rem;
+.footer-section ul {
+    list-style: none;
 }
 
-.footer-links a {
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
     color: #C0C0C0;
     text-decoration: none;
     font-size: 0.9rem;
-    font-weight: 500;
-    transition: var(--transition);
+    transition: color 0.3s;
 }
 
-.footer-links a:hover {
+.footer-section ul li a:hover {
     color: #FFD900;
 }
 
 .footer-bottom {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
     padding-top: 1.5rem;
