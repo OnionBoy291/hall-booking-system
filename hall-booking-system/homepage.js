@@ -374,11 +374,11 @@ function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
                             <span class="list-location"><i class="fas fa-map-marker-alt"></i> ${locationName}</span>
                             <span class="list-distance">· ${hall.distance}</span>
                             <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hall.address)}"
-                              target="_blank"
-                                class="show-map"
-                              onclick="event.stopPropagation()">
-                                Show on map
-                                </a>
+                            target="_blank"
+                            class="show-map"
+                            onclick="event.stopPropagation()">
+                            Show on map
+                            </a>
                         </div>
                     </div>
                     <div class="list-amenities">
@@ -477,6 +477,27 @@ function filterByLocation(location) {
     });
 }
 
+// If homepage is opened with ?location=xxx, apply the filter automatically
+function applyLocationFromQuery() {
+    const params = new URLSearchParams(window.location.search);
+    const location = params.get('location');
+    if (!location) return;
+    const valid = ['kl', 'pj', 'sa', 'johor', 'penang', 'melaka'];
+    if (!valid.includes(location)) return;
+
+    // Ensure DOM is ready and controls exist
+    const locationFilter = document.getElementById('locationFilter');
+    if (!locationFilter) return;
+
+    locationFilter.value = location;
+    applyFilters();
+
+    // Scroll to halls list after rendering completes
+    setTimeout(() => {
+        document.getElementById('hall-list').scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+}
+
 // ============================================
 // REDIRECT TO BOOKING
 // ============================================
@@ -494,6 +515,9 @@ function redirectToBooking(name) {
 window.onload = () => {
     checkReminder();
     renderHalls(allHalls);
+
+    // Apply location filter if homepage is opened with a query param
+    applyLocationFromQuery();
 
     // Event listeners
     document.getElementById('searchInput').addEventListener('input', applyFilters);

@@ -756,7 +756,7 @@ body {
 }
 
 /* ============================================
-   FOOTER
+   FOOTER (homepage-like)
    ============================================ */
 .footer {
     background: #2C2C54;
@@ -791,7 +791,7 @@ body {
 .footer-section p {
     color: #C0C0C0;
     font-size: 0.9rem;
-    line-height: 1.6;
+    max-width: 300px;
 }
 
 .footer-section ul {
