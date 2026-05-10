@@ -181,36 +181,29 @@ bookingForm.addEventListener('submit', function(e) {
     const decoration = decorationCheck.checked;
     const theme = decoration ? themeSelect.value : '';
 
-    // Get existing bookings
-    let allBookings = JSON.parse(localStorage.getItem('allBookings')) || [];
-
-    // Check if hall is already booked on this date
-    const isBooked = allBookings.some(b => b.hallName === hallName && b.date === date);
-
-    if (isBooked) {
-        alert("Sorry, this date is already taken for " + hallName + ". Please choose another date.");
-    } else {
-        // Save new booking
-        const newBooking = {
-            hallName: hallName,
-            customerName: fullName,
-            ic: ic,
-            date: date,
-            payment: payment,
-            decoration: decoration,
-            theme: theme
-        };
-
-        allBookings.push(newBooking);
-        localStorage.setItem('allBookings', JSON.stringify(allBookings));
-
-        // Save as 'userBooking' for homepage reminder
-        localStorage.setItem('userBooking', JSON.stringify(newBooking));
-
-        alert("Payment Successful! Your booking is confirmed.");
-        window.location.href = 'homepage.html';
+    // Validate: ensure required fields are present
+    if (!fullName || !ic || !date || !payment) {
+        alert('Please fill in all required details.');
+        return;
     }
+
+    // Store the form input as a pending reservation
+    const pendingReservation = {
+        hallName: hallName,
+        customerName: fullName,
+        ic: ic,
+        date: date,
+        payment: payment,
+        decoration: decoration,
+        theme: theme
+    };
+
+    localStorage.setItem('pendingReservation', JSON.stringify(pendingReservation));
+
+    // Navigate to confirmation page
+    window.location.href = 'confirm_reservation.html';
 });
+
 
 // 6. Gallery modal function
 function openGallery() {
