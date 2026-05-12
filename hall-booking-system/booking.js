@@ -34,62 +34,8 @@ const breakdownTotalEl = document.getElementById('breakdown-total');
 let basePrice = 0;
 const decorationPrice = 200;
 
-// Hall data with additional info
-const hallData = {
-    'KL Convention Centre': {
-        capacity: 'Up to 3,000 guests',
-        description: 'The Kuala Lumpur Convention Centre is a world-class venue located in the heart of KLCC. Featuring state-of-the-art facilities, multiple halls, and stunning views of the Petronas Twin Towers. Perfect for international conferences, exhibitions, and grand celebrations.',
-        reviewScore: '9.2',
-        reviewCount: '2,847',
-        location: 'Kuala Lumpur City Centre'
-    },
-    'Sunway Pyramid Convention': {
-        capacity: 'Up to 1,500 guests',
-        description: 'Located within the iconic Sunway Pyramid shopping mall, this convention centre offers versatile event spaces with easy access to entertainment, dining, and accommodation options. Ideal for corporate events and product launches.',
-        reviewScore: '8.7',
-        reviewCount: '1,523',
-        location: 'Petaling Jaya, Selangor'
-    },
-    'Setia City Convention Centre': {
-        capacity: 'Up to 2,000 guests',
-        description: 'Setia City Convention Centre is a modern multi-purpose venue in Setia Alam. With its contemporary design and flexible spaces, it caters to exhibitions, conferences, weddings, and large-scale events.',
-        reviewScore: '9.0',
-        reviewCount: '1,124',
-        location: 'Shah Alam, Selangor'
-    },
-    'MATRADE Exhibition Centre': {
-        capacity: 'Up to 2,500 guests',
-        description: 'MATRADE Exhibition and Convention Centre is Malaysia premier trade and exhibition venue. Featuring expansive halls and meeting rooms, it hosts major international trade shows and business events.',
-        reviewScore: '8.8',
-        reviewCount: '1,891',
-        location: 'Kuala Lumpur'
-    },
-    'Persada Johor Convention Centre': {
-        capacity: 'Up to 4,000 guests',
-        description: 'Persada Johor International Convention Centre is the largest convention centre in southern Malaysia. Its striking architecture and waterfront location make it a landmark venue for major events.',
-        reviewScore: '9.1',
-        reviewCount: '987',
-        location: 'Johor Bahru, Johor'
-    },
-    'SPICE Arena Penang': {
-        capacity: 'Up to 10,000 guests',
-        description: 'SPICE Arena is Penang premier indoor arena and convention centre. With its massive capacity and modern facilities, it hosts concerts, sports events, exhibitions, and large conferences.',
-        reviewScore: '8.9',
-        reviewCount: '2,156',
-        location: 'Bayan Lepas, Penang'
-    },
-    'Hang Tuah Stadium Melaka': {
-        capacity: 'Up to 1,000 guests',
-        description: 'Hang Tuah Stadium offers a unique venue for events in historic Melaka. With both indoor and outdoor facilities, it is perfect for sports events, community gatherings, and cultural celebrations.',
-        reviewScore: '8.5',
-        reviewCount: '742',
-        location: 'Melaka City, Melaka'
-    }
-};
-
 // 3. Populate page with hall data
 if (selectedHall && selectedHall.name === hallName) {
-    const extraData = hallData[hallName] || {};
     
     // Main image
     hallImageMain.src = selectedHall.img;
@@ -108,28 +54,28 @@ if (selectedHall && selectedHall.name === hallName) {
     hallStarsEl.innerHTML = starsHtml;
     
     // Location text
-    hallLocationText.innerText = extraData.location || 'Malaysia';
-    sidebarLocationEl.innerText = extraData.location || 'Malaysia';
+    hallLocationText.innerText = selectedHall.location || 'Malaysia';
+    sidebarLocationEl.innerText = selectedHall.location || 'Malaysia';
     
     // Description and capacity
-    if (extraData.description) {
-        hallDescriptionEl.innerText = extraData.description;
+    if (selectedHall.description) {
+        hallDescriptionEl.innerText = selectedHall.description;
     }
-    if (extraData.capacity) {
-        hallCapacityEl.innerText = extraData.capacity;
+    if (selectedHall.capacity) {
+        hallCapacityEl.innerText = selectedHall.capacity;
     }
     
     // Review score
-    if (extraData.reviewScore) {
-        reviewScoreEl.innerText = extraData.reviewScore;
-        miniScoreEl.innerText = extraData.reviewScore;
+    if (selectedHall.reviewScore) {
+        reviewScoreEl.innerText = selectedHall.reviewScore;
+        miniScoreEl.innerText = selectedHall.reviewScore;
         sidebarScoreEl.innerText = 'Excellent';
     }
     
     // Update review count text
     const reviewCountEl = document.getElementById('review-count');
-    if (reviewCountEl && extraData.reviewCount) {
-        reviewCountEl.innerText = `${extraData.reviewCount} reviews`;
+    if (reviewCountEl && selectedHall.reviewCount) {
+        reviewCountEl.innerText = `${selectedHall.reviewCount} reviews`;
     }
     
     // Price

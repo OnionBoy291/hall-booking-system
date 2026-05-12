@@ -1,128 +1,19 @@
 // ============================================
 // DATABASE - Real Malaysian Halls with Full Details
 // ============================================
-const allHalls = [
-    {
-        name: "KL Convention Centre",
-        price: 1500,
-        location: "kl",
-        rating: 5,
-        reviewScore: 9.2,
-        reviewCount: 2847,
-        img: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Kuala_Lumpur_Convention_Centre_%28northeastern_exterior%29%2C_Kuala_Lumpur.jpg",
-        address: "Kuala Lumpur Convention Centre, Jalan Pinang, 50088 Kuala Lumpur",
-        distance: "0.5 km from KLCC",
-        amenities: ["Free WiFi", "Parking", "Air conditioning", "Catering"],
-        highlights: ["Genius discount", "Free cancellation"],
-        capacity: "Up to 3,000 guests",
-        description: "World-class venue in the heart of KLCC with stunning Petronas Twin Towers views."
-    },
-    {
-        name: "Sunway Pyramid Convention",
-        price: 900,
-        location: "pj",
-        rating: 4,
-        reviewScore: 8.7,
-        reviewCount: 1523,
-        img: "https://upload.wikimedia.org/wikipedia/commons/6/64/Sunway_pyramid_mall_malaysia_photos_%2821%29.JPG",
-        address: "Sunway Pyramid, Jalan PJS 11/15, Bandar Sunway, 47500 Petaling Jaya",
-        distance: "15 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Shopping access", "Hotel nearby"],
-        highlights: ["Best seller"],
-        capacity: "Up to 1,500 guests",
-        description: "Versatile event spaces within the iconic Sunway Pyramid shopping mall."
-    },
-    {
-        name: "Setia City Convention Centre",
-        price: 2100,
-        location: "sa",
-        rating: 5,
-        reviewScore: 9.0,
-        reviewCount: 1124,
-        img: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Setia_City_Convention_Centre_%28250521-1833%29.jpg",
-        address: "Setia City Convention Centre, Jalan Setia Dagang AG U13/AG, Setia Alam",
-        distance: "25 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Modern AV", "Spacious halls"],
-        highlights: ["Top rated", "Free cancellation"],
-        capacity: "Up to 2,000 guests",
-        description: "Modern multi-purpose venue with contemporary design in Setia Alam."
-    },
-    {
-        name: "MATRADE Exhibition Centre",
-        price: 1800,
-        location: "kl",
-        rating: 4,
-        reviewScore: 8.8,
-        reviewCount: 1891,
-        img: "https://upload.wikimedia.org/wikipedia/commons/c/ce/MATRADE_Exhibition_and_Convention_Centre_and_Menara_MITI_in_April_2020.jpg",
-        address: "MATRADE Exhibition Centre, Jalan Khidmat Usaha, 50480 Kuala Lumpur",
-        distance: "5 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Trade show ready", "Meeting rooms"],
-        highlights: ["Genius discount"],
-        capacity: "Up to 2,500 guests",
-        description: "Malaysia's premier trade and exhibition venue with expansive halls."
-    },
-    {
-        name: "Persada Johor Convention Centre",
-        price: 1200,
-        location: "johor",
-        rating: 5,
-        reviewScore: 9.1,
-        reviewCount: 987,
-        img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Persada_Johor_International_Convention_Centre%2C_Johor_Bahru.jpg",
-        address: "Persada Johor, Jalan Abdullah Ibrahim, 80000 Johor Bahru",
-        distance: "1 km from JB city centre",
-        amenities: ["Free WiFi", "Parking", "Waterfront view", "VIP rooms"],
-        highlights: ["Top location"],
-        capacity: "Up to 4,000 guests",
-        description: "Largest convention centre in southern Malaysia with waterfront location."
-    },
-    {
-        name: "SPICE Arena Penang",
-        price: 1100,
-        location: "penang",
-        rating: 4,
-        reviewScore: 8.9,
-        reviewCount: 2156,
-        img: "https://upload.wikimedia.org/wikipedia/commons/2/2c/SPICE_Arena_2023.jpg",
-        address: "SPICE Arena, Jalan Tun Dr Awang, 11900 Bayan Lepas, Penang",
-        distance: "10 km from Georgetown",
-        amenities: ["Free WiFi", "Parking", "Massive capacity", "Modern facilities"],
-        highlights: ["Best seller", "Free cancellation"],
-        capacity: "Up to 10,000 guests",
-        description: "Penang's premier indoor arena for concerts, exhibitions, and conferences."
-    },
-    {
-        name: "Hang Tuah Stadium Melaka",
-        price: 800,
-        location: "melaka",
-        rating: 4,
-        reviewScore: 8.5,
-        reviewCount: 742,
-        img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Hang_Tuah_Stadium.JPG",
-        address: "Hang Tuah Stadium, Jalan Hang Tuah, 75300 Melaka",
-        distance: "2 km from Melaka city centre",
-        amenities: ["Parking", "Outdoor space", "Historic location", "Budget friendly"],
-        highlights: ["Great value"],
-        capacity: "Up to 1,000 guests",
-        description: "Unique venue in historic Melaka with indoor and outdoor facilities."
-    },
-    {
-        name: "MITEC Kuala Lumpur",
-        price: 2500,
-        location: "kl",
-        rating: 5,
-        reviewScore: 9.3,
-        reviewCount: 1567,
-        img: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Malaysia_International_Trade_and_Exhibition_Centre_in_April_2020_01.jpg",
-        address: "MITEC, 8 Jalan Dutamas 2, Kompleks Kerajaan, 50480 Kuala Lumpur",
-        distance: "8 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Massive halls", "Modern facilities"],
-        highlights: ["Top rated", "Genius discount"],
-        capacity: "Up to 5,000 guests",
-        description: "Malaysia's largest exhibition centre with state-of-the-art facilities for international events."
+let allHalls = [];
+async function loadHalls() {
+    try {
+        const response = await fetch('halls.json');
+        allHalls = await response.json();
+
+        renderHalls(allHalls);
+        applyLocationFromQuery();
+
+    } catch (error) {
+        console.error('Error loading halls:', error);
     }
-];
+}
 
 // Location name mapping
 const locationNames = {
@@ -514,7 +405,7 @@ function redirectToBooking(name) {
 // ============================================
 window.onload = () => {
     checkReminder();
-    renderHalls(allHalls);
+    loadHalls();
 
     // Apply location filter if homepage is opened with a query param
     applyLocationFromQuery();
