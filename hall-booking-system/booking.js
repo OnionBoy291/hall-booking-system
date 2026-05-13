@@ -114,7 +114,66 @@ decorationCheck.addEventListener('change', function() {
     }
 });
 
-// 5. Form Submission
+// 5. Saved Halls (cross-page favourites)
+const saveBtn = document.getElementById('saveBtn');
+
+function getSavedHalls() {
+    try {
+        return JSON.parse(localStorage.getItem('savedHalls')) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function setSavedHalls(halls) {
+    localStorage.setItem('savedHalls', JSON.stringify(halls));
+}
+
+function applySaveButtonState() {
+    if (!saveBtn) return;
+    if (!hallName) return;
+
+    const saved = getSavedHalls();
+    const isSaved = saved.includes(hallName);
+
+    const icon = saveBtn.querySelector('i');
+    if (!icon) return;
+
+    if (isSaved) {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        saveBtn.style.color = '#000000';
+    } else {
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        saveBtn.style.color = '';
+    }
+}
+
+function toggleSave() {
+    if (!saveBtn) return;
+    if (!hallName) return;
+
+    const saved = getSavedHalls();
+    const isSaved = saved.includes(hallName);
+
+    const next = isSaved ? saved.filter(n => n !== hallName) : [...saved, hallName];
+    setSavedHalls(next);
+
+    // reflect immediately
+    applySaveButtonState();
+}
+
+if (saveBtn) {
+    saveBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleSave();
+    });
+}
+
+applySaveButtonState();
+
+// 6. Form Submission
 const bookingForm = document.getElementById('bookingForm');
 
 bookingForm.addEventListener('submit', function(e) {

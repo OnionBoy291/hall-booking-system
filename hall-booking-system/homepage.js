@@ -199,8 +199,8 @@ function createGridCard(hall, locationName, scoreLabel, formattedPrice, index) {
                 <img src="${hall.img}" alt="${hall.name}" loading="lazy">
                 <div class="rating-badge">${hall.rating} <i class="fas fa-star"></i></div>
                 ${hall.highlights.includes('Best seller') ? '<div class="bestseller-badge">Best Seller</div>' : ''}
-                <button class="heart-btn" onclick="event.stopPropagation(); toggleHeart(this)">
-                    <i class="far fa-heart"></i>
+                <button class="heart-btn" data-hall-name="${hall.name}" onclick="event.stopPropagation(); toggleHeart(this)">
+                    <i class="${isHallSaved(hall.name) ? 'fas' : 'far'} fa-heart"></i>
                 </button>
             </div>
             <div class="hall-info">
@@ -253,7 +253,7 @@ function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
                 <img src="${hall.img}" alt="${hall.name}" loading="lazy">
                 <div class="rating-badge">${hall.rating} <i class="fas fa-star"></i></div>
                 ${hall.highlights.includes('Best seller') ? '<div class="bestseller-badge">Best Seller</div>' : ''}
-                <button class="heart-btn" onclick="event.stopPropagation(); toggleHeart(this)">
+                <button class="heart-btn" data-hall-name="${hall.name}" onclick="event.stopPropagation(); toggleHeart(this)">
                     <i class="far fa-heart"></i>
                 </button>
             </div>
@@ -308,20 +308,54 @@ function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
 }
 
 // ============================================
+// SAVED HALLS (cross-page favourites)
+// ============================================
+function getSavedHalls() {
+    try {
+        return JSON.parse(localStorage.getItem('savedHalls')) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function setSavedHalls(halls) {
+    localStorage.setItem('savedHalls', JSON.stringify(halls));
+}
+
+function isHallSaved(hallName) {
+    const saved = getSavedHalls();
+    return saved.includes(hallName);
+}
+
+// ============================================
 // HEART BUTTON TOGGLE
 // ============================================
 function toggleHeart(btn) {
+    // We encode hall name on the button so booking.html can share it too.
+    // If missing, fallback to closest card title.
+    const hallName = btn.getAttribute('data-hall-name') || (btn.closest('.hall-card, .hall-list-card')?.querySelector('h3, .hall-title, .list-title')?.textContent || '').trim();
+    if (!hallName) return;
+
     const icon = btn.querySelector('i');
-    if (icon.classList.contains('far')) {
-        icon.classList.remove('far');
-        icon.classList.add('fas');
-        btn.style.color = '#000000';
-    } else {
+    const saved = getSavedHalls();
+
+    const currentlySaved = saved.includes(hallName);
+    if (currentlySaved) {
+        // Unsave
+        const next = saved.filter(n => n !== hallName);
+        setSavedHalls(next);
         icon.classList.remove('fas');
         icon.classList.add('far');
         btn.style.color = '';
+    } else {
+        // Save
+        setSavedHalls([...saved, hallName]);
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        btn.style.color = '#000000';
     }
 }
+
 
 // ============================================
 // FILTERS & SEARCH
