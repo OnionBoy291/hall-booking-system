@@ -150,6 +150,26 @@ bookingForm.addEventListener('submit', function(e) {
     window.location.href = 'confirm_reservation.html';
 });
 
+const shareButton = document.getElementById("shareBtn");
+
+shareButton.addEventListener("click", async () => {
+  const shareData = {
+    title: hallName ? `${hallName}` : "Hall Booking",
+    text: hallName ? `Check out ${hallName} for your event!` : "Check out this hall for your event!",
+    url: window.location.href
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Link copied to clipboard!");
+    }
+  } catch (err) {
+    console.log("Share cancelled");
+  }
+});
 
 // 6. Gallery modal function
 function openGallery() {
