@@ -53,9 +53,20 @@ if (selectedHall && selectedHall.name === hallName) {
     }
     hallStarsEl.innerHTML = starsHtml;
     
-    // Location text
-    hallLocationText.innerText = selectedHall.location || 'Malaysia';
-    sidebarLocationEl.innerText = selectedHall.location || 'Malaysia';
+    // Location text (convert short code to full city name + Malaysia)
+    const locationCodes = {
+        kl: 'Kuala Lumpur',
+        pj: 'Petaling Jaya',
+        sa: 'Shah Alam',
+        johor: 'Johor Bahru',
+        penang: 'Penang',
+        melaka: 'Melaka'
+    };
+
+    const city = locationCodes[selectedHall.location] || selectedHall.location || 'Malaysia';
+    hallLocationText.innerText = `${city}, Malaysia`;
+    sidebarLocationEl.innerText = `${city}, Malaysia`;
+
     
     // Description and capacity
     if (selectedHall.description) {
