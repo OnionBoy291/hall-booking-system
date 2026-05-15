@@ -1,128 +1,19 @@
 // ============================================
 // DATABASE - Real Malaysian Halls with Full Details
 // ============================================
-const allHalls = [
-    {
-        name: "KL Convention Centre",
-        price: 1500,
-        location: "kl",
-        rating: 5,
-        reviewScore: 9.2,
-        reviewCount: 2847,
-        img: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Kuala_Lumpur_Convention_Centre_%28northeastern_exterior%29%2C_Kuala_Lumpur.jpg",
-        address: "Kuala Lumpur Convention Centre, Jalan Pinang, 50088 Kuala Lumpur",
-        distance: "0.5 km from KLCC",
-        amenities: ["Free WiFi", "Parking", "Air conditioning", "Catering"],
-        highlights: ["Genius discount", "Free cancellation"],
-        capacity: "Up to 3,000 guests",
-        description: "World-class venue in the heart of KLCC with stunning Petronas Twin Towers views."
-    },
-    {
-        name: "Sunway Pyramid Convention",
-        price: 900,
-        location: "pj",
-        rating: 4,
-        reviewScore: 8.7,
-        reviewCount: 1523,
-        img: "https://upload.wikimedia.org/wikipedia/commons/6/64/Sunway_pyramid_mall_malaysia_photos_%2821%29.JPG",
-        address: "Sunway Pyramid, Jalan PJS 11/15, Bandar Sunway, 47500 Petaling Jaya",
-        distance: "15 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Shopping access", "Hotel nearby"],
-        highlights: ["Best seller"],
-        capacity: "Up to 1,500 guests",
-        description: "Versatile event spaces within the iconic Sunway Pyramid shopping mall."
-    },
-    {
-        name: "Setia City Convention Centre",
-        price: 2100,
-        location: "sa",
-        rating: 5,
-        reviewScore: 9.0,
-        reviewCount: 1124,
-        img: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Setia_City_Convention_Centre_%28250521-1833%29.jpg",
-        address: "Setia City Convention Centre, Jalan Setia Dagang AG U13/AG, Setia Alam",
-        distance: "25 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Modern AV", "Spacious halls"],
-        highlights: ["Top rated", "Free cancellation"],
-        capacity: "Up to 2,000 guests",
-        description: "Modern multi-purpose venue with contemporary design in Setia Alam."
-    },
-    {
-        name: "MATRADE Exhibition Centre",
-        price: 1800,
-        location: "kl",
-        rating: 4,
-        reviewScore: 8.8,
-        reviewCount: 1891,
-        img: "https://upload.wikimedia.org/wikipedia/commons/c/ce/MATRADE_Exhibition_and_Convention_Centre_and_Menara_MITI_in_April_2020.jpg",
-        address: "MATRADE Exhibition Centre, Jalan Khidmat Usaha, 50480 Kuala Lumpur",
-        distance: "5 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Trade show ready", "Meeting rooms"],
-        highlights: ["Genius discount"],
-        capacity: "Up to 2,500 guests",
-        description: "Malaysia's premier trade and exhibition venue with expansive halls."
-    },
-    {
-        name: "Persada Johor Convention Centre",
-        price: 1200,
-        location: "johor",
-        rating: 5,
-        reviewScore: 9.1,
-        reviewCount: 987,
-        img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Persada_Johor_International_Convention_Centre%2C_Johor_Bahru.jpg",
-        address: "Persada Johor, Jalan Abdullah Ibrahim, 80000 Johor Bahru",
-        distance: "1 km from JB city centre",
-        amenities: ["Free WiFi", "Parking", "Waterfront view", "VIP rooms"],
-        highlights: ["Top location"],
-        capacity: "Up to 4,000 guests",
-        description: "Largest convention centre in southern Malaysia with waterfront location."
-    },
-    {
-        name: "SPICE Arena Penang",
-        price: 1100,
-        location: "penang",
-        rating: 4,
-        reviewScore: 8.9,
-        reviewCount: 2156,
-        img: "https://upload.wikimedia.org/wikipedia/commons/2/2c/SPICE_Arena_2023.jpg",
-        address: "SPICE Arena, Jalan Tun Dr Awang, 11900 Bayan Lepas, Penang",
-        distance: "10 km from Georgetown",
-        amenities: ["Free WiFi", "Parking", "Massive capacity", "Modern facilities"],
-        highlights: ["Best seller", "Free cancellation"],
-        capacity: "Up to 10,000 guests",
-        description: "Penang's premier indoor arena for concerts, exhibitions, and conferences."
-    },
-    {
-        name: "Hang Tuah Stadium Melaka",
-        price: 800,
-        location: "melaka",
-        rating: 4,
-        reviewScore: 8.5,
-        reviewCount: 742,
-        img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Hang_Tuah_Stadium.JPG",
-        address: "Hang Tuah Stadium, Jalan Hang Tuah, 75300 Melaka",
-        distance: "2 km from Melaka city centre",
-        amenities: ["Parking", "Outdoor space", "Historic location", "Budget friendly"],
-        highlights: ["Great value"],
-        capacity: "Up to 1,000 guests",
-        description: "Unique venue in historic Melaka with indoor and outdoor facilities."
-    },
-    {
-        name: "MITEC Kuala Lumpur",
-        price: 2500,
-        location: "kl",
-        rating: 5,
-        reviewScore: 9.3,
-        reviewCount: 1567,
-        img: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Malaysia_International_Trade_and_Exhibition_Centre_in_April_2020_01.jpg",
-        address: "MITEC, 8 Jalan Dutamas 2, Kompleks Kerajaan, 50480 Kuala Lumpur",
-        distance: "8 km from KL city centre",
-        amenities: ["Free WiFi", "Parking", "Massive halls", "Modern facilities"],
-        highlights: ["Top rated", "Genius discount"],
-        capacity: "Up to 5,000 guests",
-        description: "Malaysia's largest exhibition centre with state-of-the-art facilities for international events."
+let allHalls = [];
+async function loadHalls() {
+    try {
+        const response = await fetch('halls.json');
+        allHalls = await response.json();
+
+        renderHalls(allHalls);
+        applyLocationFromQuery();
+
+    } catch (error) {
+        console.error('Error loading halls:', error);
     }
-];
+}
 
 // Location name mapping
 const locationNames = {
@@ -250,8 +141,15 @@ function formatPayment(method) {
 // ============================================
 let isSearchActive = false;
 
+function updateVenuesCount(count) {
+    const el = document.getElementById('venuesCount');
+    if (!el) return;
+    el.innerText = `${count} venue${count === 1 ? '' : 's'} available for your next event`;
+}
+
 function renderHalls(hallsToDisplay) {
     const wrapper = document.getElementById('hall-list');
+
     wrapper.innerHTML = "";
 
     if (hallsToDisplay.length === 0) {
@@ -308,8 +206,8 @@ function createGridCard(hall, locationName, scoreLabel, formattedPrice, index) {
                 <img src="${hall.img}" alt="${hall.name}" loading="lazy">
                 <div class="rating-badge">${hall.rating} <i class="fas fa-star"></i></div>
                 ${hall.highlights.includes('Best seller') ? '<div class="bestseller-badge">Best Seller</div>' : ''}
-                <button class="heart-btn" onclick="event.stopPropagation(); toggleHeart(this)">
-                    <i class="far fa-heart"></i>
+                <button class="heart-btn" data-hall-name="${hall.name}" onclick="event.stopPropagation(); toggleHeart(this)">
+                    <i class="${isHallSaved(hall.name) ? 'fas' : 'far'} fa-heart"></i>
                 </button>
             </div>
             <div class="hall-info">
@@ -362,7 +260,7 @@ function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
                 <img src="${hall.img}" alt="${hall.name}" loading="lazy">
                 <div class="rating-badge">${hall.rating} <i class="fas fa-star"></i></div>
                 ${hall.highlights.includes('Best seller') ? '<div class="bestseller-badge">Best Seller</div>' : ''}
-                <button class="heart-btn" onclick="event.stopPropagation(); toggleHeart(this)">
+                <button class="heart-btn" data-hall-name="${hall.name}" onclick="event.stopPropagation(); toggleHeart(this)">
                     <i class="far fa-heart"></i>
                 </button>
             </div>
@@ -388,8 +286,9 @@ function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
                         <p>${hall.description}</p>
                     </div>
                     <div class="list-capacity">
-                        <i class="fas fa-users"></i> Capacity: ${hall.capacity}
-                    </div>
+Capacity: Up to ${Number(hall.capacity).toLocaleString()} guests</div>
+
+
                 </div>
                 <div class="list-score-section">
                     <div class="score-header">
@@ -417,29 +316,65 @@ function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
 }
 
 // ============================================
+// SAVED HALLS (cross-page favourites)
+// ============================================
+function getSavedHalls() {
+    try {
+        return JSON.parse(localStorage.getItem('savedHalls')) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function setSavedHalls(halls) {
+    localStorage.setItem('savedHalls', JSON.stringify(halls));
+}
+
+function isHallSaved(hallName) {
+    const saved = getSavedHalls();
+    return saved.includes(hallName);
+}
+
+// ============================================
 // HEART BUTTON TOGGLE
 // ============================================
 function toggleHeart(btn) {
+    // We encode hall name on the button so booking.html can share it too.
+    // If missing, fallback to closest card title.
+    const hallName = btn.getAttribute('data-hall-name') || (btn.closest('.hall-card, .hall-list-card')?.querySelector('h3, .hall-title, .list-title')?.textContent || '').trim();
+    if (!hallName) return;
+
     const icon = btn.querySelector('i');
-    if (icon.classList.contains('far')) {
-        icon.classList.remove('far');
-        icon.classList.add('fas');
-        btn.style.color = '#000000';
-    } else {
+    const saved = getSavedHalls();
+
+    const currentlySaved = saved.includes(hallName);
+    if (currentlySaved) {
+        // Unsave
+        const next = saved.filter(n => n !== hallName);
+        setSavedHalls(next);
         icon.classList.remove('fas');
         icon.classList.add('far');
         btn.style.color = '';
+    } else {
+        // Save
+        setSavedHalls([...saved, hallName]);
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        btn.style.color = '#000000';
     }
 }
+
 
 // ============================================
 // FILTERS & SEARCH
 // ============================================
 function applyFilters() {
-    const search = document.getElementById('searchInput').value.toLowerCase();
+    const searchInput = document.getElementById('searchInput');
+    const search = (searchInput?.value || '').toLowerCase();
     const price = document.getElementById('priceFilter').value;
     const loc = document.getElementById('locationFilter').value;
     const rate = document.getElementById('ratingFilter').value;
+    const capacity = document.getElementById('capacityFilter')?.value || 'all';
 
     const filtered = allHalls.filter(hall => {
         const matchesSearch = hall.name.toLowerCase().includes(search) ||
@@ -457,11 +392,20 @@ function applyFilters() {
         if (rate === "5") matchesRate = hall.rating === 5;
         else if (rate === "4") matchesRate = hall.rating >= 4;
 
-        return matchesSearch && matchesPrice && matchesLoc && matchesRate;
+        let matchesCapacity = true;
+        if (capacity !== 'all') {
+            const minCap = Number(capacity);
+            matchesCapacity = Number(hall.capacity) >= minCap;
+        }
+
+        return matchesSearch && matchesPrice && matchesLoc && matchesRate && matchesCapacity;
     });
 
     renderHalls(filtered);
+    updateVenuesCount(filtered.length);
 }
+
+
 
 function filterByLocation(location) {
 
@@ -514,7 +458,7 @@ function redirectToBooking(name) {
 // ============================================
 window.onload = () => {
     checkReminder();
-    renderHalls(allHalls);
+    loadHalls();
 
     // Apply location filter if homepage is opened with a query param
     applyLocationFromQuery();
@@ -524,6 +468,11 @@ window.onload = () => {
     document.getElementById('priceFilter').addEventListener('change', applyFilters);
     document.getElementById('locationFilter').addEventListener('change', applyFilters);
     document.getElementById('ratingFilter').addEventListener('change', applyFilters);
+
+    const capacityFilterEl = document.getElementById('capacityFilter');
+    if (capacityFilterEl) capacityFilterEl.addEventListener('change', applyFilters);
+
     document.getElementById('searchBtn').addEventListener('click', applyFilters);
 };
+
 
