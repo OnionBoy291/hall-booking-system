@@ -141,8 +141,15 @@ function formatPayment(method) {
 // ============================================
 let isSearchActive = false;
 
+function updateVenuesCount(count) {
+    const el = document.getElementById('venuesCount');
+    if (!el) return;
+    el.innerText = `${count} venue${count === 1 ? '' : 's'} available for your next event`;
+}
+
 function renderHalls(hallsToDisplay) {
     const wrapper = document.getElementById('hall-list');
+
     wrapper.innerHTML = "";
 
     if (hallsToDisplay.length === 0) {
@@ -279,8 +286,9 @@ function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
                         <p>${hall.description}</p>
                     </div>
                     <div class="list-capacity">
-                        <i class="fas fa-users"></i> Capacity: ${hall.capacity}
-                    </div>
+Capacity: Up to ${Number(hall.capacity).toLocaleString()} guests</div>
+
+
                 </div>
                 <div class="list-score-section">
                     <div class="score-header">
@@ -361,10 +369,12 @@ function toggleHeart(btn) {
 // FILTERS & SEARCH
 // ============================================
 function applyFilters() {
-    const search = document.getElementById('searchInput').value.toLowerCase();
+    const searchInput = document.getElementById('searchInput');
+    const search = (searchInput?.value || '').toLowerCase();
     const price = document.getElementById('priceFilter').value;
     const loc = document.getElementById('locationFilter').value;
     const rate = document.getElementById('ratingFilter').value;
+    const capacity = document.getElementById('capacityFilter')?.value || 'all';
 
     const filtered = allHalls.filter(hall => {
         const matchesSearch = hall.name.toLowerCase().includes(search) ||
@@ -382,11 +392,20 @@ function applyFilters() {
         if (rate === "5") matchesRate = hall.rating === 5;
         else if (rate === "4") matchesRate = hall.rating >= 4;
 
-        return matchesSearch && matchesPrice && matchesLoc && matchesRate;
+        let matchesCapacity = true;
+        if (capacity !== 'all') {
+            const minCap = Number(capacity);
+            matchesCapacity = Number(hall.capacity) >= minCap;
+        }
+
+        return matchesSearch && matchesPrice && matchesLoc && matchesRate && matchesCapacity;
     });
 
     renderHalls(filtered);
+    updateVenuesCount(filtered.length);
 }
+
+
 
 function filterByLocation(location) {
 
@@ -449,6 +468,11 @@ window.onload = () => {
     document.getElementById('priceFilter').addEventListener('change', applyFilters);
     document.getElementById('locationFilter').addEventListener('change', applyFilters);
     document.getElementById('ratingFilter').addEventListener('change', applyFilters);
+
+    const capacityFilterEl = document.getElementById('capacityFilter');
+    if (capacityFilterEl) capacityFilterEl.addEventListener('change', applyFilters);
+
     document.getElementById('searchBtn').addEventListener('click', applyFilters);
 };
+
 

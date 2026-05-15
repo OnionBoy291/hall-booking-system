@@ -36,71 +36,12 @@
         <div class="hero-content">
             <h1>Find your next perfect event venue</h1>
             <p>Search halls, ballrooms &amp; convention centres across Malaysia</p>
-
-            <div class="search-bar">
-                <div class="search-item">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Where are you going?">
-                </div>
-                <div class="search-divider"></div>
-                <div class="search-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <input type="date" id="checkInDate" placeholder="Check-in date">
-                </div>
-                <div class="search-divider"></div>
-                <div class="search-item">
-                    <i class="fas fa-calendar-check"></i>
-                    <input type="date" id="checkOutDate" placeholder="Check-out date">
-                </div>
-                <div class="search-divider"></div>
-                <div class="search-item">
-                    <i class="fas fa-user-friends"></i>
-                    <select id="guestFilter">
-                        <option value="all">All Guests</option>
-                        <option value="50">Up to 50</option>
-                        <option value="100">Up to 100</option>
-                        <option value="200">Up to 200</option>
-                        <option value="500">500+</option>
-                    </select>
-                </div>
-                <button id="searchBtn" class="search-btn">Search</button>
+            <div style="margin-top: 1.5rem;">
+                <button class="explore-btn-fancy" type="button" onclick="document.getElementById('hall-list').scrollIntoView({behavior:'smooth'});">Explore Halls</button>
             </div>
-    </section>
-
-    <!-- Filters Section -->
-    <section class="filters-section">
-        <div class="filters-container">
-            <div class="filter-item">
-                <label>Price Range</label>
-                <select id="priceFilter">
-                    <option value="all">All Prices</option>
-                    <option value="low">Below $1,000</option>
-                    <option value="mid">$1,000 - $2,000</option>
-                    <option value="high">Above $2,000</option>
-                </select>
-            </div>
-
-            <div class="filter-item">
-                <label>Location</label>
-                <select id="locationFilter">
-                    <option value="all">All Locations</option>
-                    <option value="kl">Kuala Lumpur</option>
-                    <option value="pj">Petaling Jaya</option>
-                    <option value="sa">Shah Alam</option>
-                    <option value="johor">Johor Bahru</option>
-                    <option value="penang">Penang</option>
-                    <option value="melaka">Melaka</option>
-                </select>
-            </div>
-
-            <div class="filter-item">
-                <label>Rating</label>
-                <select id="ratingFilter">
-                    <option value="all">All Ratings</option>
-                    <option value="5">5 Stars</option>
-                    <option value="4">4 Stars &amp; Above</option>
-                </select>
-            </div>
+        
+        </div>
+                
     </section>
 
     <!-- Booking Reminder -->
@@ -203,11 +144,70 @@
             </div>
     </section>
 
+     <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="filters-container">
+            <div class="filter-item">
+                <label>Price Range</label>
+                <select id="priceFilter">
+                    <option value="all">All Prices</option>
+                    <option value="low">Below $1,000</option>
+                    <option value="mid">$1,000 - $2,000</option>
+                    <option value="high">Above $2,000</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>Location</label>
+                <select id="locationFilter">
+                    <option value="all">All Locations</option>
+                    <option value="kl">Kuala Lumpur</option>
+                    <option value="pj">Petaling Jaya</option>
+                    <option value="sa">Shah Alam</option>
+                    <option value="johor">Johor Bahru</option>
+                    <option value="penang">Penang</option>
+                    <option value="melaka">Melaka</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>Rating</label>
+                <select id="ratingFilter">
+                    <option value="all">All Ratings</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars &amp; Above</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>Hall Capacity</label>
+                <select id="capacityFilter">
+                    <option value="all">Any Capacity</option>
+                    <option value="1000">1000+</option>
+                    <option value="2000">2000+</option>
+                    <option value="3000">3000+</option>
+                    <option value="4000">4000+</option>
+                    <option value="5000">5000+</option>
+                </select>
+            </div>
+
+            <!-- Search (moved from hero) -->
+            <div class="search-bar">
+                <div class="search-item">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Where are you going?">
+                </div>
+                <button id="searchBtn" class="search-btn">Search</button>
+            </div>
+    </section>
+
+
     <!-- Halls Section -->
     <section class="halls-section">
         <div class="section-header">
             <h2>Popular Halls in Malaysia</h2>
-            <p>8 venues available for your next event</p>
+            <p id="venuesCount">8 venues available for your next event</p>
+
         </div>
         <div class="halls-grid" id="hall-list"></div>
     </section>

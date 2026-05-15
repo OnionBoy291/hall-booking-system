@@ -255,7 +255,6 @@ nav .nav-links a.active {
     border: 2px dashed rgba(255, 217, 0, 0.35);
 }
 
-
 .member-card h3 {
     font-size: 1.2rem;
     font-weight: 800;
@@ -314,76 +313,35 @@ nav .nav-links a.active {
 }
 
 /* ============================================
-   FOOTER (homepage-like)
+   BACK TO HOME (Breadcrumb-style button)
    ============================================ */
-.footer {
+.back-to-home-bar {
     background: #2C2C54;
-    color: #ffffff;
-    margin-top: 4rem;
-    padding: 3rem 2rem 1rem;
-    border-top: 1px solid rgba(192,192,192,0.2);
+    border-bottom: 1px solid rgba(192,192,192,0.2);
+    padding: 0.85rem 2rem;
 }
 
-.footer-content {
-    max-width: 1200px;
+.back-to-home-container {
+    max-width: 1280px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
 }
 
-.footer-section h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: #FFD900;
-}
-
-.footer-section h4 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-.footer-section p {
-    color: #C0C0C0;
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section ul li a {
+.back-to-home-link {
     color: #C0C0C0;
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color 0.3s;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
 }
 
-.footer-section ul li a:hover {
+.back-to-home-link:hover {
     color: #FFD900;
+    transform: translateX(-3px);
 }
 
-.footer-bottom {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(192,192,192,0.2);
-    color: #C0C0C0;
-    font-size: 0.85rem;
-}
-
-/* ============================================
-   Responsive
-   ============================================ */
 /* ============================================
    CONTACT INFORMATION SECTION
    (about.html uses: .contact-section, .contact-container, .contact-card)
@@ -486,6 +444,74 @@ nav .nav-links a.active {
 }
 
 /* ============================================
+   FOOTER (homepage-like)
+   ============================================ */
+.footer {
+    background: #2C2C54;
+    color: #ffffff;
+    margin-top: 4rem;
+    padding: 3rem 2rem 1rem;
+    border-top: 1px solid rgba(192,192,192,0.2);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #FFD900;
+}
+
+.footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.footer-section p {
+    color: #C0C0C0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #C0C0C0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #FFD900;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(192,192,192,0.2);
+    color: #C0C0C0;
+    font-size: 0.85rem;
+}
+
+/* ============================================
    Responsive
    ============================================ */
 @media (max-width: 768px) {
@@ -526,6 +552,9 @@ nav .nav-links a.active {
         width: 100%;
         max-width: 420px;
     }
-}
 
+    .back-to-home-bar {
+        padding: 0.75rem 1.25rem;
+    }
+}
 

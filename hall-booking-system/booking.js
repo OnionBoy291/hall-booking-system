@@ -61,9 +61,11 @@ if (selectedHall && selectedHall.name === hallName) {
     if (selectedHall.description) {
         hallDescriptionEl.innerText = selectedHall.description;
     }
-    if (selectedHall.capacity) {
-        hallCapacityEl.innerText = selectedHall.capacity;
+    if (selectedHall.capacity !== undefined && selectedHall.capacity !== null) {
+        // halls.json stores capacity as number; keep the UI wording as "Up to ... guests"
+        hallCapacityEl.innerText = `Up to ${Number(selectedHall.capacity).toLocaleString()} guests`;
     }
+
     
     // Review score
     if (selectedHall.reviewScore) {

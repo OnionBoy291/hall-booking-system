@@ -11,7 +11,7 @@
         "distance": "0.5 km from KLCC",
         "amenities": ["Free WiFi", "Parking", "Air conditioning", "Catering"],
         "highlights": ["Genius discount", "Free cancellation"],
-        "capacity": "Up to 3,000 guests",
+        "capacity": 3000,
         "description": "World-class venue in the heart of KLCC with stunning Petronas Twin Towers views."
     },
     {
@@ -26,7 +26,7 @@
         "distance": "15 km from KL city centre",
         "amenities": ["Free WiFi", "Parking", "Shopping access", "Hotel nearby"],
         "highlights": ["Best seller"],
-        "capacity": "Up to 1,500 guests",
+        "capacity": 1500,
         "description": "Versatile event spaces within the iconic Sunway Pyramid shopping mall."
     },
     {
@@ -41,7 +41,7 @@
         "distance": "25 km from KL city centre",
         "amenities": ["Free WiFi", "Parking", "Modern AV", "Spacious halls"],
         "highlights": ["Top rated", "Free cancellation"],
-        "capacity": "Up to 2,000 guests",
+        "capacity": 2000,
         "description": "Modern multi-purpose venue with contemporary design in Setia Alam."
     },
     {
@@ -56,7 +56,7 @@
         "distance": "5 km from KL city centre",
         "amenities": ["Free WiFi", "Parking", "Trade show ready", "Meeting rooms"],
         "highlights": ["Genius discount"],
-        "capacity": "Up to 2,500 guests",
+        "capacity": 2500,
         "description": "Malaysia's premier trade and exhibition venue with expansive halls."
     },
     {
@@ -71,7 +71,7 @@
         "distance": "1 km from JB city centre",
         "amenities": ["Free WiFi", "Parking", "Waterfront view", "VIP rooms"],
         "highlights": ["Top location"],
-        "capacity": "Up to 4,000 guests",
+        "capacity": 4000,
         "description": "Largest convention centre in southern Malaysia with waterfront location."
     },
     {
@@ -86,7 +86,7 @@
         "distance": "10 km from Georgetown",
         "amenities": ["Free WiFi", "Parking", "Massive capacity", "Modern facilities"],
         "highlights": ["Best seller", "Free cancellation"],
-        "capacity": "Up to 10,000 guests",
+        "capacity": 10000,
         "description": "Penang's premier indoor arena for concerts, exhibitions, and conferences."
     },
     {
@@ -101,7 +101,7 @@
         "distance": "2 km from Melaka city centre",
         "amenities": ["Parking", "Outdoor space", "Historic location", "Budget friendly"],
         "highlights": ["Great value"],
-        "capacity": "Up to 1,000 guests",
+        "capacity": 1000,
         "description": "Unique venue in historic Melaka with indoor and outdoor facilities."
     },
     {
@@ -116,7 +116,7 @@
         "distance": "8 km from KL city centre",
         "amenities": ["Free WiFi", "Parking", "Massive halls", "Modern facilities"],
         "highlights": ["Top rated", "Genius discount"],
-        "capacity": "Up to 5,000 guests",
+        "capacity": 5000,
         "description": "Malaysia's largest exhibition centre with state-of-the-art facilities for international events."
     }
 ]
