@@ -69,7 +69,27 @@ if (!selectedHall || !pending) {
 } else {
   imgEl.src = selectedHall.img;
   nameEl.textContent = selectedHall.name;
-  locEl.textContent = selectedHall.location ? selectedHall.location : '-';
+
+  // selectedHall.location can be a short code (kl/pj/sa/johor/penang/melaka)
+  // or already a full name. Always display: "<place>, Malaysia".
+  function toMalaysiaLocation(val) {
+    if (!val) return '-';
+    const s = String(val).trim().toLowerCase();
+    const locationCodes = {
+      kl: 'Kuala Lumpur',
+      pj: 'Petaling Jaya',
+      sa: 'Shah Alam',
+      johor: 'Johor Bahru',
+      penang: 'Penang',
+      melaka: 'Melaka'
+    };
+
+    const city = locationCodes[s] || val;
+    return `${city}, Malaysia`;
+  }
+
+  locEl.textContent = selectedHall.location ? toMalaysiaLocation(selectedHall.location) : '-';
+
 
   fullnameEl.textContent = pending.customerName;
   icEl.textContent = pending.ic;
