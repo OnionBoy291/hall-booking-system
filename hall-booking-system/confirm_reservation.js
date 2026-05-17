@@ -1,18 +1,7 @@
 // Confirm Reservation page logic
 
-function money(n) {
-  const num = Number(n) || 0;
-  return `RM ${num.toLocaleString()}`;
-}
 
-function mapPayment(method) {
-  const map = {
-    online: 'Online Banking (FPX)',
-    card: 'Credit/Debit Card',
-    ewallet: 'E-Wallet (TNG/Grab)'
-  };
-  return map[method] || method || '-';
-}
+
 
 function getSafeText(val, fallback = '-') {
   if (val === undefined || val === null || val === '') return fallback;
@@ -61,11 +50,12 @@ if (!selectedHall || !pending) {
   fullnameEl.textContent = pending?.customerName || '-';
   icEl.textContent = pending?.ic || '-';
   dateEl.textContent = pending?.date || '-';
-  paymentEl.textContent = mapPayment(pending?.payment);
+  paymentEl.textContent = bbFormatPayment(pending?.payment);
+
   themeEl.textContent = pending?.theme || 'None';
   decoEl.textContent = pending?.decoration ? 'Yes' : 'No';
-  hallPriceEl.textContent = money(selectedHall?.price);
-  totalEl.textContent = money(selectedHall?.price);
+  hallPriceEl.textContent = bbMoney(selectedHall?.price);
+  totalEl.textContent = bbMoney(selectedHall?.price);
 } else {
   imgEl.src = selectedHall.img;
   nameEl.textContent = selectedHall.name;
@@ -94,7 +84,8 @@ if (!selectedHall || !pending) {
   fullnameEl.textContent = pending.customerName;
   icEl.textContent = pending.ic;
   dateEl.textContent = pending.date;
-  paymentEl.textContent = mapPayment(pending.payment);
+  paymentEl.textContent = bbFormatPayment(pending.payment);
+
   themeEl.textContent = pending.decoration ? (pending.theme || 'None') : 'None';
   decoEl.textContent = pending.decoration ? 'Yes' : 'No';
 
@@ -102,14 +93,15 @@ if (!selectedHall || !pending) {
   const decorationPrice = 200;
   const totalPrice = basePrice + (pending.decoration ? decorationPrice : 0);
 
-  hallPriceEl.textContent = money(basePrice);
+  hallPriceEl.textContent = bbMoney(basePrice);
+
 
   if (pending.decoration) {
     decoRowEl.style.display = 'flex';
-    totalEl.textContent = money(totalPrice);
+    totalEl.textContent = bbMoney(totalPrice);
   } else {
     decoRowEl.style.display = 'none';
-    totalEl.textContent = money(totalPrice);
+    totalEl.textContent = bbMoney(totalPrice);
   }
 }
 
