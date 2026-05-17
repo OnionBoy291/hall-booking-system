@@ -101,7 +101,7 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.6rem 1.2rem;
-    border-radius: var(--radius-sm);
+    border-radius: 20px;
     transition: var(--transition);
     display: flex;
     align-items: center;
