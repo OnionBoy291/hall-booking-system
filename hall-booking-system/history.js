@@ -176,7 +176,7 @@ function renderBookings() {
                 <p>${currentFilter === 'all' 
                     ? 'You have not made any hall reservations yet. Start exploring our amazing venues!' 
                     : `No ${currentFilter} bookings found.`}</p>
-                <a href="homepage.html" class="explore-btn">
+href="index.html" class="explore-btn"
                     <i class="fas fa-search"></i> Explore Halls
                 </a>
             </div>
