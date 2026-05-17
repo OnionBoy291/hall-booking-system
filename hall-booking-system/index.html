@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HallBooking</title>
+  <meta http-equiv="refresh" content="0; url=homepage.html" />
+  <style>
+    :root {
+      --primary: #FFD900;
+      --bg1: #2C2C54;
+      --bg2: #1A1A3E;
+      --text-muted: #C0C0C0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .redirect {
+      text-align: center;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .redirect span {
+      color: var(--primary);
+    }
+
+    .redirect small {
+      display: block;
+      margin-top: 8px;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="redirect" role="status" aria-live="polite">
+    Redirecting...
+    <small>Please wait a moment.</small>
+  </div>
+</body>
+</html>
+
+
