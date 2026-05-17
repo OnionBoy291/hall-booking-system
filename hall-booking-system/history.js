@@ -242,7 +242,7 @@ function renderBookings() {
                         </div>
                         <div class="detail-item">
                             <label><i class="fas fa-credit-card"></i> Payment</label>
-                            <span>${formatPayment(b.payment)}</span>
+${bbFormatPayment(b.payment)}
                         </div>
                         <div class="detail-item">
                             <label><i class="fas fa-paint-brush"></i> Decoration</label>
@@ -276,14 +276,8 @@ function renderBookings() {
 }
 
 // 13. Format payment method untuk display yang lebih cantik
-function formatPayment(method) {
-    const map = {
-        'online': 'Online Banking (FPX)',
-        'card': 'Credit/Debit Card',
-        'ewallet': 'E-Wallet (TNG/Grab)'
-    };
-    return map[method] || method;
-}
+// Payment formatting moved to shared_utils.js (bbFormatPayment)
+
 
 // 14. Tab filter functionality
 function setupTabs() {

@@ -1,99 +1,38 @@
-// ============================================
-// FAQ - Accordion + Search Filter
-// ============================================
+// FAQ accordion behavior
+// Clicking a question button toggles its panel visibility.
 
-function initAccordion() {
+(function () {
+  function setupFaqAccordions() {
     const accordions = document.querySelectorAll('[data-accordion]');
+    if (!accordions.length) return;
 
     accordions.forEach((accordion) => {
-        const items = accordion.querySelectorAll('.accordion-item');
-        const buttons = accordion.querySelectorAll('.accordion-button');
+      const items = accordion.querySelectorAll('.accordion-item');
+      items.forEach((item) => {
+        const button = item.querySelector('.accordion-button');
+        const panel = item.querySelector('.accordion-panel');
+        if (!button || !panel) return;
 
-        function setOpen(item, open) {
-            const btn = item.querySelector('.accordion-button');
-            const panel = item.querySelector('.accordion-panel');
+        // Ensure initial state matches [data-open]
+        const isOpen = item.getAttribute('data-open') === 'true' || item.getAttribute('data-open') === true;
+        item.setAttribute('data-open', isOpen ? 'true' : 'false');
+        panel.hidden = !isOpen;
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
-            if (!btn || !panel) return;
-
-            item.dataset.open = open ? 'true' : 'false';
-            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            panel.hidden = !open;
-
-            const icon = btn.querySelector('i');
-            if (icon) {
-                icon.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
-        }
-
-        buttons.forEach((button) => {
-            button.addEventListener('click', () => {
-                const item = button.closest('.accordion-item');
-                if (!item) return;
-
-                const isOpen = item.dataset.open === 'true';
-
-                // simple single-open behavior per accordion
-                items.forEach((i) => {
-                    if (i === item) return;
-                    if (i.dataset.open === 'true') setOpen(i, false);
-                });
-
-                setOpen(item, !isOpen);
-            });
+        button.addEventListener('click', () => {
+          const openNow = item.getAttribute('data-open') !== 'true';
+          item.setAttribute('data-open', openNow ? 'true' : 'false');
+          panel.hidden = !openNow;
+          button.setAttribute('aria-expanded', openNow ? 'true' : 'false');
         });
-
-        // initialize states
-        items.forEach((item) => {
-            if (!item.dataset.open) item.dataset.open = 'false';
-            const btn = item.querySelector('.accordion-button');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
-            const panel = item.querySelector('.accordion-panel');
-            if (panel) panel.hidden = true;
-        });
+      });
     });
-}
+  }
 
-function initSearch() {
-    const input = document.getElementById('faqSearch');
-    if (!input) return;
-
-    const questionButtons = document.querySelectorAll('.accordion-button');
-
-    function normalize(str) {
-        return (str || '')
-            .toString()
-            .toLowerCase()
-            .trim();
-    }
-
-    input.addEventListener('input', () => {
-        const q = normalize(input.value);
-
-        questionButtons.forEach((btn) => {
-            const item = btn.closest('.accordion-item');
-            if (!item) return;
-
-            const questionText = normalize(btn.innerText);
-            const answerText = normalize(item.querySelector('.accordion-panel')?.innerText);
-
-            const matches = !q || questionText.includes(q) || answerText.includes(q);
-
-            item.style.display = matches ? '' : 'none';
-
-            // if it doesn't match, ensure it's closed
-            if (!matches && item.dataset.open === 'true') {
-                const panel = item.querySelector('.accordion-panel');
-                item.dataset.open = 'false';
-                if (panel) panel.hidden = true;
-                const b = item.querySelector('.accordion-button');
-                if (b) b.setAttribute('aria-expanded', 'false');
-            }
-        });
-    });
-}
-
-window.onload = () => {
-    initAccordion();
-    initSearch();
-};
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFaqAccordions);
+  } else {
+    setupFaqAccordions();
+  }
+})();
 

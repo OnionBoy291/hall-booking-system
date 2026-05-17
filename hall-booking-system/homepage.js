@@ -94,7 +94,8 @@ function checkReminder() {
                             </div>
                             <div class="reminder-meta-item">
                                 <i class="fas fa-credit-card"></i>
-                                <span>${formatPayment(data.payment)}</span>
+                        ${bbFormatPayment(data.payment)}
+
                             </div>
                         </div>
                         ${countdownHtml}
@@ -127,14 +128,8 @@ function checkReminder() {
 }
 
 // Helper function to format payment method
-function formatPayment(method) {
-    const map = {
-        'online': 'Online Banking (FPX)',
-        'card': 'Credit/Debit Card',
-        'ewallet': 'E-Wallet (TNG/Grab)'
-    };
-    return map[method] || method;
-}
+// Payment formatting moved to shared_utils.js (bbFormatPayment)
+
 
 // ============================================
 // RENDER HALLS - GRID OR LIST VIEW
@@ -407,19 +402,7 @@ function applyFilters() {
 
 
 
-function filterByLocation(location) {
 
-    // set dropdown filter ikut location
-    document.getElementById('locationFilter').value = location;
-
-    // jalan kan filter system sedia ada
-    applyFilters();
-
-    // scroll ke results
-    document.getElementById('hall-list').scrollIntoView({
-        behavior: 'smooth'
-    });
-}
 
 // If homepage is opened with ?location=xxx, apply the filter automatically
 function applyLocationFromQuery() {
