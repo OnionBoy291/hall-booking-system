@@ -146,7 +146,7 @@ yesBtn.addEventListener('click', () => {
 
   hideModal();
   alert('Thankyou for you reservation');
-  window.location.href = 'homepage.html';
+window.location.href = 'index.html';
 });
 
 // Click outside modal to close

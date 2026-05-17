@@ -264,7 +264,7 @@ ${bbFormatPayment(b.payment)}
                                     <i class="fas fa-trash-alt"></i> Cancel
                                 </button>
                             ` : ''}
-                            <button class="btn btn-primary" onclick="window.location.href='homepage.html'">
+window.location.href='index.html'
                                 <i class="fas fa-redo"></i> Book Again
                             </button>
                         </div>
