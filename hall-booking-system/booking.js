@@ -34,62 +34,8 @@ const breakdownTotalEl = document.getElementById('breakdown-total');
 let basePrice = 0;
 const decorationPrice = 200;
 
-// Hall data with additional info
-const hallData = {
-    'KL Convention Centre': {
-        capacity: 'Up to 3,000 guests',
-        description: 'The Kuala Lumpur Convention Centre is a world-class venue located in the heart of KLCC. Featuring state-of-the-art facilities, multiple halls, and stunning views of the Petronas Twin Towers. Perfect for international conferences, exhibitions, and grand celebrations.',
-        reviewScore: '9.2',
-        reviewCount: '2,847',
-        location: 'Kuala Lumpur City Centre'
-    },
-    'Sunway Pyramid Convention': {
-        capacity: 'Up to 1,500 guests',
-        description: 'Located within the iconic Sunway Pyramid shopping mall, this convention centre offers versatile event spaces with easy access to entertainment, dining, and accommodation options. Ideal for corporate events and product launches.',
-        reviewScore: '8.7',
-        reviewCount: '1,523',
-        location: 'Petaling Jaya, Selangor'
-    },
-    'Setia City Convention Centre': {
-        capacity: 'Up to 2,000 guests',
-        description: 'Setia City Convention Centre is a modern multi-purpose venue in Setia Alam. With its contemporary design and flexible spaces, it caters to exhibitions, conferences, weddings, and large-scale events.',
-        reviewScore: '9.0',
-        reviewCount: '1,124',
-        location: 'Shah Alam, Selangor'
-    },
-    'MATRADE Exhibition Centre': {
-        capacity: 'Up to 2,500 guests',
-        description: 'MATRADE Exhibition and Convention Centre is Malaysia premier trade and exhibition venue. Featuring expansive halls and meeting rooms, it hosts major international trade shows and business events.',
-        reviewScore: '8.8',
-        reviewCount: '1,891',
-        location: 'Kuala Lumpur'
-    },
-    'Persada Johor Convention Centre': {
-        capacity: 'Up to 4,000 guests',
-        description: 'Persada Johor International Convention Centre is the largest convention centre in southern Malaysia. Its striking architecture and waterfront location make it a landmark venue for major events.',
-        reviewScore: '9.1',
-        reviewCount: '987',
-        location: 'Johor Bahru, Johor'
-    },
-    'SPICE Arena Penang': {
-        capacity: 'Up to 10,000 guests',
-        description: 'SPICE Arena is Penang premier indoor arena and convention centre. With its massive capacity and modern facilities, it hosts concerts, sports events, exhibitions, and large conferences.',
-        reviewScore: '8.9',
-        reviewCount: '2,156',
-        location: 'Bayan Lepas, Penang'
-    },
-    'Hang Tuah Stadium Melaka': {
-        capacity: 'Up to 1,000 guests',
-        description: 'Hang Tuah Stadium offers a unique venue for events in historic Melaka. With both indoor and outdoor facilities, it is perfect for sports events, community gatherings, and cultural celebrations.',
-        reviewScore: '8.5',
-        reviewCount: '742',
-        location: 'Melaka City, Melaka'
-    }
-};
-
 // 3. Populate page with hall data
 if (selectedHall && selectedHall.name === hallName) {
-    const extraData = hallData[hallName] || {};
     
     // Main image
     hallImageMain.src = selectedHall.img;
@@ -107,29 +53,42 @@ if (selectedHall && selectedHall.name === hallName) {
     }
     hallStarsEl.innerHTML = starsHtml;
     
-    // Location text
-    hallLocationText.innerText = extraData.location || 'Malaysia';
-    sidebarLocationEl.innerText = extraData.location || 'Malaysia';
+    // Location text (convert short code to full city name + Malaysia)
+    const locationCodes = {
+        kl: 'Kuala Lumpur',
+        pj: 'Petaling Jaya',
+        sa: 'Shah Alam',
+        johor: 'Johor Bahru',
+        penang: 'Penang',
+        melaka: 'Melaka'
+    };
+
+    const city = locationCodes[selectedHall.location] || selectedHall.location || 'Malaysia';
+    hallLocationText.innerText = `${city}, Malaysia`;
+    sidebarLocationEl.innerText = `${city}, Malaysia`;
+
     
     // Description and capacity
-    if (extraData.description) {
-        hallDescriptionEl.innerText = extraData.description;
+    if (selectedHall.description) {
+        hallDescriptionEl.innerText = selectedHall.description;
     }
-    if (extraData.capacity) {
-        hallCapacityEl.innerText = extraData.capacity;
+    if (selectedHall.capacity !== undefined && selectedHall.capacity !== null) {
+        // halls.json stores capacity as number; keep the UI wording as "Up to ... guests"
+        hallCapacityEl.innerText = `Up to ${Number(selectedHall.capacity).toLocaleString()} guests`;
     }
+
     
     // Review score
-    if (extraData.reviewScore) {
-        reviewScoreEl.innerText = extraData.reviewScore;
-        miniScoreEl.innerText = extraData.reviewScore;
+    if (selectedHall.reviewScore) {
+        reviewScoreEl.innerText = selectedHall.reviewScore;
+        miniScoreEl.innerText = selectedHall.reviewScore;
         sidebarScoreEl.innerText = 'Excellent';
     }
     
     // Update review count text
     const reviewCountEl = document.getElementById('review-count');
-    if (reviewCountEl && extraData.reviewCount) {
-        reviewCountEl.innerText = `${extraData.reviewCount} reviews`;
+    if (reviewCountEl && selectedHall.reviewCount) {
+        reviewCountEl.innerText = `${selectedHall.reviewCount} reviews`;
     }
     
     // Price
@@ -168,7 +127,66 @@ decorationCheck.addEventListener('change', function() {
     }
 });
 
-// 5. Form Submission
+// 5. Saved Halls (cross-page favourites)
+const saveBtn = document.getElementById('saveBtn');
+
+function getSavedHalls() {
+    try {
+        return JSON.parse(localStorage.getItem('savedHalls')) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function setSavedHalls(halls) {
+    localStorage.setItem('savedHalls', JSON.stringify(halls));
+}
+
+function applySaveButtonState() {
+    if (!saveBtn) return;
+    if (!hallName) return;
+
+    const saved = getSavedHalls();
+    const isSaved = saved.includes(hallName);
+
+    const icon = saveBtn.querySelector('i');
+    if (!icon) return;
+
+    if (isSaved) {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        saveBtn.style.color = '#000000';
+    } else {
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        saveBtn.style.color = '';
+    }
+}
+
+function toggleSave() {
+    if (!saveBtn) return;
+    if (!hallName) return;
+
+    const saved = getSavedHalls();
+    const isSaved = saved.includes(hallName);
+
+    const next = isSaved ? saved.filter(n => n !== hallName) : [...saved, hallName];
+    setSavedHalls(next);
+
+    // reflect immediately
+    applySaveButtonState();
+}
+
+if (saveBtn) {
+    saveBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleSave();
+    });
+}
+
+applySaveButtonState();
+
+// 6. Form Submission
 const bookingForm = document.getElementById('bookingForm');
 
 bookingForm.addEventListener('submit', function(e) {
@@ -204,6 +222,26 @@ bookingForm.addEventListener('submit', function(e) {
     window.location.href = 'confirm_reservation.html';
 });
 
+const shareButton = document.getElementById("shareBtn");
+
+shareButton.addEventListener("click", async () => {
+  const shareData = {
+    title: hallName ? `${hallName}` : "Hall Booking",
+    text: hallName ? `Check out ${hallName} for your event!` : "Check out this hall for your event!",
+    url: window.location.href
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Link copied to clipboard!");
+    }
+  } catch (err) {
+    console.log("Share cancelled");
+  }
+});
 
 // 6. Gallery modal function
 function openGallery() {

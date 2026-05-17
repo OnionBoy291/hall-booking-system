@@ -817,12 +817,13 @@ body {
 .footer-bottom {
     max-width: 1200px;
     margin: 0 auto;
-    text-align: center;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(192,192,192,0.2);
+    text-align: center;
     color: #C0C0C0;
     font-size: 0.85rem;
 }
+
 
 /* ============================================
    ANIMATIONS

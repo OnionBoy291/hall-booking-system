@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Your Hall - HallBooking</title>
+    <title>Book Your Hall</title>
     <link rel="stylesheet" href="booking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
             <ul class="nav-links">
                 <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="history.html"><i class="fas fa-calendar-alt"></i> Your Bookings</a></li>
-                <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
             </ul>
         </div>
     </nav>
@@ -54,8 +54,8 @@
                     </div>
                 </div>
                 <div class="property-actions">
-                    <button class="action-btn"><i class="far fa-heart"></i> Save</button>
-                    <button class="action-btn"><i class="fas fa-share-alt"></i> Share</button>
+                    <button id="saveBtn" class="action-btn"><i class="far fa-heart"></i> Save</button>
+                    <button id="shareBtn" class="action-btn"><i class="fas fa-share-alt"></i> Share</button>
                 </div>
             </div>
 
@@ -411,7 +411,7 @@
             <div class="footer-links">
                 <a href="homepage.html">Home</a>
                 <a href="history.html">Your Bookings</a>
-                <a href="#">About Us</a>
+                <a href="about.html">About Us</a>
                 <a href="#">Help Centre</a>
             </div>
         </div>
@@ -421,6 +421,7 @@
     </footer>
 
     <script src="booking.js"></script>
+    <script src="accessibility.js"></script>
 </body>
 </html>
 

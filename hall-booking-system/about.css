@@ -255,7 +255,6 @@ nav .nav-links a.active {
     border: 2px dashed rgba(255, 217, 0, 0.35);
 }
 
-
 .member-card h3 {
     font-size: 1.2rem;
     font-weight: 800;
@@ -311,6 +310,137 @@ nav .nav-links a.active {
     font-size: 1.05rem;
     line-height: 1.8;
     font-weight: 400;
+}
+
+/* ============================================
+   BACK TO HOME (Breadcrumb-style button)
+   ============================================ */
+.back-to-home-bar {
+    background: #2C2C54;
+    border-bottom: 1px solid rgba(192,192,192,0.2);
+    padding: 0.85rem 2rem;
+}
+
+.back-to-home-container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.back-to-home-link {
+    color: #C0C0C0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.back-to-home-link:hover {
+    color: #FFD900;
+    transform: translateX(-3px);
+}
+
+/* ============================================
+   CONTACT INFORMATION SECTION
+   (about.html uses: .contact-section, .contact-container, .contact-card)
+   ============================================ */
+.contact-section {
+    padding: 3.5rem 2rem 4.5rem;
+}
+
+.contact-section h2 {
+    text-align: center;
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin-bottom: 1.75rem;
+    color: var(--text);
+    position: relative;
+}
+
+.contact-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 140px;
+    height: 3px;
+    background: rgba(255, 217, 0, 0.85);
+    border-radius: 50px;
+}
+
+.contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact-card {
+    width: 320px;
+    background: linear-gradient(135deg, rgba(58, 58, 106, 0.95) 0%, rgba(44, 44, 84, 0.95) 100%);
+    border: 1px solid rgba(192, 192, 192, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -25%;
+    width: 420px;
+    height: 420px;
+    background: rgba(255, 217, 0, 0.06);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.contact-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 217, 0, 0.25);
+}
+
+.contact-card:hover::before {
+    background: rgba(255, 217, 0, 0.12);
+}
+
+.contact-card i {
+    font-size: 1.55rem;
+    color: var(--primary);
+    margin-bottom: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: rgba(255, 217, 0, 0.12);
+    border: 1px solid rgba(255, 217, 0, 0.25);
+    backdrop-filter: blur(10px);
+}
+
+.contact-card h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.contact-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.7;
 }
 
 /* ============================================
@@ -412,6 +542,19 @@ nav .nav-links a.active {
 
     .project-intro {
         padding: 2.75rem 1.5rem 3.5rem;
+    }
+
+    .contact-section {
+        padding: 2.75rem 1.5rem 3.5rem;
+    }
+
+    .contact-card {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .back-to-home-bar {
+        padding: 0.75rem 1.25rem;
     }
 }
 
