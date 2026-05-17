@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Reservation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="confirm_reservation.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                <span>HallBooking</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="history.html"><i class="fas fa-calendar-alt"></i> Your Bookings</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="booking.html" onclick="history.back(); return false;"><i class="fas fa-chevron-left"></i> Back to booking</a>
+        </div>
+    </div>
+
+    <main class="confirm-wrapper">
+        <section class="confirm-card">
+            <div class="confirm-split">
+                <!-- LEFT: Hall picture -->
+                <div class="confirm-left">
+                    <div class="confirm-image">
+                        <img id="confirm-hall-image" src="" alt="Selected hall" />
+                    </div>
+                    <div class="confirm-hall-meta">
+                        <h1 id="confirm-hall-name">Loading...</h1>
+                        <div class="confirm-hall-subtitle">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="confirm-hall-location">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: User details -->
+                <div class="confirm-right">
+                    <h2>Reservation Details</h2>
+
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-user"></i> Full Name</span>
+                            <span class="detail-value" id="confirm-fullname">-</span>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-id-card"></i> IC Number</span>
+                            <span class="detail-value" id="confirm-ic">-</span>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-calendar-alt"></i> Event Date</span>
+                            <span class="detail-value" id="confirm-date">-</span>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-credit-card"></i> Payment Method</span>
+                            <span class="detail-value" id="confirm-payment">-</span>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-palette"></i> Theme</span>
+                            <span class="detail-value" id="confirm-theme">None</span>
+                        </div>
+
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-box"></i> Decoration</span>
+                            <span class="detail-value" id="confirm-decoration">No</span>
+                        </div>
+                    </div>
+
+                    <div class="confirm-total">
+                        <div class="total-row">
+                            <span>Hall price</span>
+                            <span class="total-value" id="confirm-hall-price">RM 0</span>
+                        </div>
+                        <div class="total-row" id="confirm-decoration-row" style="display:none;">
+                            <span>Decoration package</span>
+                            <span class="total-value">RM 200</span>
+                        </div>
+                        <div class="total-row total-row-final">
+                            <span>Total</span>
+                            <span class="total-value" id="confirm-total">RM 0</span>
+                        </div>
+                    </div>
+
+                    <div class="reserve-bottom">
+                        <button id="confirm-reserve-btn" class="reserve-btn" type="button">
+                            <span>Reserve</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
+            <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                <div class="modal-header">
+                    <i class="fas fa-triangle-exclamation"></i>
+                    <h3 id="modal-title">Confirm Reservation</h3>
+                </div>
+                <p class="modal-text">Are you sure want to proceed with this reservation?</p>
+
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-no" id="modal-no" type="button">No</button>
+                    <button class="modal-btn modal-btn-yes" id="modal-yes" type="button">Yes</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="confirm_reservation.js"></script>
+    <script src="accessibility.js"></script>
+</body>
+</html>
+

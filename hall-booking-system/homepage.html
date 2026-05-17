@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hall Booking System - Find Your Perfect Venue</title>
+    <title>Hall Booking System</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="homepage.css">
@@ -37,38 +37,115 @@
         <div class="hero-content">
             <h1>Find your next perfect event venue</h1>
             <p>Search halls, ballrooms &amp; convention centres across Malaysia</p>
+            <div style="margin-top: 1.5rem;">
+                <button class="explore-btn-fancy" type="button" onclick="document.getElementById('hall-list').scrollIntoView({behavior:'smooth'});">Explore Halls</button>
+            </div>
+        
+        </div>
+                
+    </section>
 
-            <div class="search-bar">
-                <div class="search-item">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Where are you going?">
+    <!-- Booking Reminder -->
+    <section id="booking-reminder" class="reminder-container"></section>
+
+    <!-- News & Promotions Marquee -->
+    <section class="news-section">
+        <div class="news-header">
+            <div class="news-title-block">
+                <div class="news-icon-ring" aria-hidden="true">
+                    <i class="fas fa-bullhorn"></i>
                 </div>
-                <div class="search-divider"></div>
-                <div class="search-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <input type="date" id="checkInDate" placeholder="Check-in date">
+                <div>
+                    <h2>News &amp; Promotions</h2>
+                    <p>Exclusive deals, upcoming events &amp; surprises</p>
                 </div>
-                <div class="search-divider"></div>
-                <div class="search-item">
-                    <i class="fas fa-calendar-check"></i>
-                    <input type="date" id="checkOutDate" placeholder="Check-out date">
-                </div>
-                <div class="search-divider"></div>
-                <div class="search-item">
-                    <i class="fas fa-user-friends"></i>
-                    <select id="guestFilter">
-                        <option value="all">All Guests</option>
-                        <option value="50">Up to 50</option>
-                        <option value="100">Up to 100</option>
-                        <option value="200">Up to 200</option>
-                        <option value="500">500+</option>
-                    </select>
-                </div>
-                <button id="searchBtn" class="search-btn">Search</button>
+        </div>
+
+        <div class="news-marquee-wrapper">
+            <div class="news-marquee-track">
+                <div class="news-card event-card">
+                    <div class="card-cartoon-bg"></div>
+                    <span class="news-badge badge-blue">Upcoming</span>
+                    <span class="news-emoji" aria-hidden="true">🎉</span>
+                    <div class="news-card-body">
+                        <h3>KLCC Mega Wedding Fair</h3>
+                        <p class="news-date"><i class="fas fa-calendar"></i> 15–17 Dec 2024</p>
+                        <p class="news-desc">Join Malaysia's biggest wedding expo at KL Convention Centre. Meet top decorators, caterers &amp; photographers!</p>
+                        <a href="#" class="news-link" onclick="redirectToBooking('KL Convention Centre'); return false;">Learn more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="cartoon-dots" aria-hidden="true">
+                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    </div>
+
+                <div class="news-card discount-card">
+                    <div class="card-cartoon-bg"></div>
+                    <span class="news-badge badge-gold">Hot Deal</span>
+                    <span class="news-emoji" aria-hidden="true">🏷️</span>
+                    <div class="news-card-body">
+                        <h3>30% Off Sunway Pyramid</h3>
+                        <p class="news-date"><i class="fas fa-clock"></i> Ends 31 Dec 2024</p>
+                        <p class="news-desc">Book Sunway Pyramid Convention this month and enjoy 30% off hall rental. Perfect for year-end dinners!</p>
+                        <a href="#" class="news-link" onclick="redirectToBooking('Sunway Pyramid Convention'); return false;">Grab deal <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="sparkle-strip" aria-hidden="true">
+                        <span>✦</span><span>✦</span><span>✦</span>
+                    </div>
+
+                <div class="news-card gift-card">
+                    <div class="card-cartoon-bg"></div>
+                    <span class="news-badge badge-pink">Free Gift</span>
+                    <span class="news-emoji" aria-hidden="true">🎁</span>
+                    <div class="news-card-body">
+                        <h3>Free Decoration Package</h3>
+                        <p class="news-date"><i class="fas fa-gift"></i> While stocks last</p>
+                        <p class="news-desc">Booking any Penang hall? Get a complimentary Elegant Classic decoration worth RM 200 free!</p>
+                        <a href="#" class="news-link" onclick="redirectToBooking('SPICE Arena Penang'); return false;">Claim now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="ribbon-tail" aria-hidden="true"></div>
+
+                <div class="news-card event-card">
+                    <div class="card-cartoon-bg"></div>
+                    <span class="news-badge badge-blue">Upcoming</span>
+                    <span class="news-emoji" aria-hidden="true">🎉</span>
+                    <div class="news-card-body">
+                        <h3>KLCC Mega Wedding Fair</h3>
+                        <p class="news-date"><i class="fas fa-calendar"></i> 15–17 Dec 2024</p>
+                        <p class="news-desc">Join Malaysia's biggest wedding expo at KL Convention Centre. Meet top decorators, caterers &amp; photographers!</p>
+                        <a href="#" class="news-link" onclick="redirectToBooking('KL Convention Centre'); return false;">Learn more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="cartoon-dots" aria-hidden="true">
+                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    </div>
+
+                <div class="news-card discount-card">
+                    <div class="card-cartoon-bg"></div>
+                    <span class="news-badge badge-gold">Hot Deal</span>
+                    <span class="news-emoji" aria-hidden="true">🏷️</span>
+                    <div class="news-card-body">
+                        <h3>30% Off Sunway Pyramid</h3>
+                        <p class="news-date"><i class="fas fa-clock"></i> Ends 31 Dec 2024</p>
+                        <p class="news-desc">Book Sunway Pyramid Convention this month and enjoy 30% off hall rental. Perfect for year-end dinners!</p>
+                        <a href="#" class="news-link">Grab deal <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="sparkle-strip" aria-hidden="true">
+                        <span>✦</span><span>✦</span><span>✦</span>
+                    </div>
+
+                <div class="news-card gift-card">
+                    <div class="card-cartoon-bg"></div>
+                    <span class="news-badge badge-pink">Free Gift</span>
+                    <span class="news-emoji" aria-hidden="true">🎁</span>
+                    <div class="news-card-body">
+                        <h3>Free Decoration Package</h3>
+                        <p class="news-date"><i class="fas fa-gift"></i> While stocks last</p>
+                        <p class="news-desc">Booking any Penang hall? Get a complimentary Elegant Classic decoration worth RM 200 free!</p>
+                        <a href="#" class="news-link">Claim now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="ribbon-tail" aria-hidden="true"></div>
             </div>
     </section>
 
-    <!-- Filters Section -->
+     <!-- Filters Section -->
     <section class="filters-section">
         <div class="filters-container">
             <div class="filter-item">
@@ -102,113 +179,36 @@
                     <option value="4">4 Stars &amp; Above</option>
                 </select>
             </div>
-    </section>
 
-    <!-- Booking Reminder -->
-    <section id="booking-reminder" class="reminder-container"></section>
+            <div class="filter-item">
+                <label>Hall Capacity</label>
+                <select id="capacityFilter">
+                    <option value="all">Any Capacity</option>
+                    <option value="1000">1000+</option>
+                    <option value="2000">2000+</option>
+                    <option value="3000">3000+</option>
+                    <option value="4000">4000+</option>
+                    <option value="5000">5000+</option>
+                </select>
+            </div>
 
-    <!-- News & Promotions Marquee -->
-    <section class="news-section">
-        <div class="news-header">
-            <div class="news-title-block">
-                <div class="news-icon-ring" aria-hidden="true">
-                    <i class="fas fa-bullhorn"></i>
+            <!-- Search (moved from hero) -->
+            <div class="search-bar">
+                <div class="search-item">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Where are you going?">
                 </div>
-                <div>
-                    <h2>News &amp; Promotions</h2>
-                    <p>Exclusive deals, upcoming events &amp; surprises</p>
-                </div>
-        </div>
-
-        <div class="news-marquee-wrapper">
-            <div class="news-marquee-track">
-                <div class="news-card event-card">
-                    <div class="card-cartoon-bg"></div>
-                    <span class="news-badge badge-blue">Upcoming</span>
-                    <span class="news-emoji" aria-hidden="true">🎉</span>
-                    <div class="news-card-body">
-                        <h3>KLCC Mega Wedding Fair</h3>
-                        <p class="news-date"><i class="fas fa-calendar"></i> 15–17 Dec 2024</p>
-                        <p class="news-desc">Join Malaysia's biggest wedding expo at KL Convention Centre. Meet top decorators, caterers &amp; photographers!</p>
-                        <a href="#" class="news-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="cartoon-dots" aria-hidden="true">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    </div>
-
-                <div class="news-card discount-card">
-                    <div class="card-cartoon-bg"></div>
-                    <span class="news-badge badge-gold">Hot Deal</span>
-                    <span class="news-emoji" aria-hidden="true">🏷️</span>
-                    <div class="news-card-body">
-                        <h3>30% Off Sunway Pyramid</h3>
-                        <p class="news-date"><i class="fas fa-clock"></i> Ends 31 Dec 2024</p>
-                        <p class="news-desc">Book Sunway Pyramid Convention this month and enjoy 30% off hall rental. Perfect for year-end dinners!</p>
-                        <a href="#" class="news-link">Grab deal <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="sparkle-strip" aria-hidden="true">
-                        <span>✦</span><span>✦</span><span>✦</span>
-                    </div>
-
-                <div class="news-card gift-card">
-                    <div class="card-cartoon-bg"></div>
-                    <span class="news-badge badge-pink">Free Gift</span>
-                    <span class="news-emoji" aria-hidden="true">🎁</span>
-                    <div class="news-card-body">
-                        <h3>Free Decoration Package</h3>
-                        <p class="news-date"><i class="fas fa-gift"></i> While stocks last</p>
-                        <p class="news-desc">Booking any Penang or Johor hall? Get a complimentary Elegant Classic decoration worth RM 200 free!</p>
-                        <a href="#" class="news-link">Claim now <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="ribbon-tail" aria-hidden="true"></div>
-
-                <div class="news-card event-card">
-                    <div class="card-cartoon-bg"></div>
-                    <span class="news-badge badge-blue">Upcoming</span>
-                    <span class="news-emoji" aria-hidden="true">🎉</span>
-                    <div class="news-card-body">
-                        <h3>KLCC Mega Wedding Fair</h3>
-                        <p class="news-date"><i class="fas fa-calendar"></i> 15–17 Dec 2024</p>
-                        <p class="news-desc">Join Malaysia's biggest wedding expo at KL Convention Centre. Meet top decorators, caterers &amp; photographers!</p>
-                        <a href="#" class="news-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="cartoon-dots" aria-hidden="true">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    </div>
-
-                <div class="news-card discount-card">
-                    <div class="card-cartoon-bg"></div>
-                    <span class="news-badge badge-gold">Hot Deal</span>
-                    <span class="news-emoji" aria-hidden="true">🏷️</span>
-                    <div class="news-card-body">
-                        <h3>30% Off Sunway Pyramid</h3>
-                        <p class="news-date"><i class="fas fa-clock"></i> Ends 31 Dec 2024</p>
-                        <p class="news-desc">Book Sunway Pyramid Convention this month and enjoy 30% off hall rental. Perfect for year-end dinners!</p>
-                        <a href="#" class="news-link">Grab deal <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="sparkle-strip" aria-hidden="true">
-                        <span>✦</span><span>✦</span><span>✦</span>
-                    </div>
-
-                <div class="news-card gift-card">
-                    <div class="card-cartoon-bg"></div>
-                    <span class="news-badge badge-pink">Free Gift</span>
-                    <span class="news-emoji" aria-hidden="true">🎁</span>
-                    <div class="news-card-body">
-                        <h3>Free Decoration Package</h3>
-                        <p class="news-date"><i class="fas fa-gift"></i> While stocks last</p>
-                        <p class="news-desc">Booking any Penang or Johor hall? Get a complimentary Elegant Classic decoration worth RM 200 free!</p>
-                        <a href="#" class="news-link">Claim now <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="ribbon-tail" aria-hidden="true"></div>
+                <button id="searchBtn" class="search-btn">Search</button>
             </div>
     </section>
+
 
     <!-- Halls Section -->
     <section class="halls-section">
         <div class="section-header">
             <h2>Popular Halls in Malaysia</h2>
-            <p>8 venues available for your next event</p>
+            <p id="venuesCount">8 venues available for your next event</p>
+
         </div>
         <div class="halls-grid" id="hall-list"></div>
     </section>
@@ -224,7 +224,7 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="about.html">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="about.html#contact-section">Contact</a></li>
 
                     <li><a href="#">Terms &amp; Conditions</a></li>
                 </ul>
@@ -232,17 +232,18 @@
             <div class="footer-section">
                 <h4>Locations</h4>
                 <ul>
-                    <li><a href="#">Kuala Lumpur</a></li>
-                    <li><a href="#">Penang</a></li>
-                    <li><a href="#">Johor Bahru</a></li>
+                    <li><a href="#" onclick="filterByLocation('kl')">Kuala Lumpur</a></li>
+                    <li><a href="#" onclick="filterByLocation('penang')">Penang</a></li>
+                    <li><a href="#" onclick="filterByLocation('johor')">Johor Bahru</a></li>
                 </ul>
             </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 HallBooking. All rights reserved.</p>
+            <p>&copy; 2026 HallBooking. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="homepage.js"></script>
+    <script src="accessibility.js"></script>
 </body>
 </html>
