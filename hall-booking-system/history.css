@@ -1,8 +1,3 @@
-/* ============================================
-   HISTORY PAGE - PREMIUM NAVY/GOLD/SILVER THEME
-   ============================================ */
-
-/* CSS Variables */
 :root {
     --primary: #FFD900;
     --primary-light: #BFA600;
@@ -36,7 +31,6 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -52,9 +46,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ============================================
-   NAVBAR
-   ============================================ */
 .navbar {
     background: #2C2C54;
     padding: 0;
@@ -121,9 +112,6 @@ body {
     font-weight: 600;
 }
 
-/* ============================================
-   BREADCRUMB
-   ============================================ */
 .breadcrumb {
     background: #2C2C54;
     border-bottom: 1px solid var(--gray-300);
@@ -151,9 +139,6 @@ body {
     transform: translateX(-3px);
 }
 
-/* ============================================
-   PAGE HEADER
-   ============================================ */
 .page-header {
     background: linear-gradient(135deg, #2C2C54 0%, #1A1A3E 50%, #2C2C54 100%);
     color: #ffffff;
@@ -228,9 +213,6 @@ body {
     color: #C0C0C0;
 }
 
-/* ============================================
-   STATS SECTION
-   ============================================ */
 .stats-section {
     max-width: 1280px;
     margin: -3rem auto 3rem;
@@ -345,9 +327,6 @@ body {
     font-weight: 500;
 }
 
-/* ============================================
-   HISTORY CONTAINER
-   ============================================ */
 .history-container {
     max-width: 1280px;
     margin: 0 auto;
@@ -392,7 +371,6 @@ body {
     border-radius: 20px;
 }
 
-/* Filter Tabs */
 .filter-tabs {
     display: flex;
     gap: 0.5rem;
@@ -430,16 +408,12 @@ body {
     box-shadow: 0 2px 8px rgba(255,217,0,0.3);
 }
 
-/* ============================================
-   BOOKINGS LIST
-   ============================================ */
 .bookings-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-/* Empty State */
 .empty-state {
     text-align: center;
     padding: 5rem 2rem;
@@ -507,9 +481,6 @@ body {
     background: #E6C200;
 }
 
-/* ============================================
-   BOOKING CARD
-   ============================================ */
 .booking-card {
     background: #3A3A6A;
     border-radius: var(--radius-lg);
@@ -528,7 +499,6 @@ body {
     border-color: rgba(192,192,192,0.3);
 }
 
-/* Card Image Section */
 .card-image-section {
     position: relative;
     overflow: hidden;
@@ -572,7 +542,6 @@ body {
     color: #C0C0C0;
 }
 
-/* Card Content Section */
 .card-content {
     padding: 1.75rem 2rem;
     display: flex;
@@ -606,7 +575,6 @@ body {
     color: #FFD900;
 }
 
-/* Status Badge */
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -647,7 +615,6 @@ body {
     box-shadow: none;
 }
 
-/* Card Details Grid */
 .card-details {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -688,7 +655,6 @@ body {
     color: #C0C0C0;
 }
 
-/* Card Footer */
 .card-footer {
     margin-top: auto;
     display: flex;
@@ -755,9 +721,6 @@ body {
     box-shadow: 0 4px 12px rgba(255,217,0,0.3);
 }
 
-/* ============================================
-   FOOTER (homepage-like)
-   ============================================ */
 .footer {
     background: #2C2C54;
     color: #ffffff;
@@ -823,10 +786,6 @@ body {
     font-size: 0.85rem;
 }
 
-
-/* ============================================
-   ANIMATIONS
-   ============================================ */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -849,7 +808,6 @@ body {
     }
 }
 
-/* Stagger animation for cards */
 .booking-card:nth-child(1) { animation-delay: 0.05s; }
 .booking-card:nth-child(2) { animation-delay: 0.1s; }
 .booking-card:nth-child(3) { animation-delay: 0.15s; }
@@ -857,9 +815,6 @@ body {
 .booking-card:nth-child(5) { animation-delay: 0.25s; }
 .booking-card:nth-child(6) { animation-delay: 0.3s; }
 
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
 @media (max-width: 968px) {
     .booking-card {
         grid-template-columns: 1fr;

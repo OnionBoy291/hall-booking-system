@@ -1,5 +1,3 @@
-// Confirm Reservation page logic
-
 function money(n) {
   const num = Number(n) || 0;
   return `RM ${num.toLocaleString()}`;
@@ -19,10 +17,25 @@ function getSafeText(val, fallback = '-') {
   return String(val);
 }
 
+function formatHallLocation(locationCode) {
+  const locationCodes = {
+    kl: 'Kuala Lumpur',
+    pj: 'Petaling Jaya',
+    sa: 'Shah Alam',
+    johor: 'Johor Bahru',
+    penang: 'Penang',
+    melaka: 'Melaka'
+  };
+
+  const city = locationCodes[locationCode] || locationCode;
+  if (!city) return '-';
+  return `${city}, Malaysia`;
+}
+
 const selectedHall = JSON.parse(localStorage.getItem('selectedHall'));
+
 const pending = JSON.parse(localStorage.getItem('pendingReservation'));
 
-// Elements
 const imgEl = document.getElementById('confirm-hall-image');
 const nameEl = document.getElementById('confirm-hall-name');
 const locEl = document.getElementById('confirm-hall-location');
@@ -54,10 +67,11 @@ function hideModal() {
 }
 
 if (!selectedHall || !pending) {
-  // Keep page functional even if storage missing
   nameEl.textContent = getSafeText(selectedHall?.name, 'Unknown Hall');
-  locEl.textContent = '-';
+  locEl.textContent = formatHallLocation(selectedHall?.location);
+
   if (imgEl) imgEl.src = selectedHall?.img || '';
+
   fullnameEl.textContent = pending?.customerName || '-';
   icEl.textContent = pending?.ic || '-';
   dateEl.textContent = pending?.date || '-';
@@ -69,9 +83,10 @@ if (!selectedHall || !pending) {
 } else {
   imgEl.src = selectedHall.img;
   nameEl.textContent = selectedHall.name;
-  locEl.textContent = selectedHall.location ? selectedHall.location : '-';
+  locEl.textContent = formatHallLocation(selectedHall.location);
 
   fullnameEl.textContent = pending.customerName;
+
   icEl.textContent = pending.ic;
   dateEl.textContent = pending.date;
   paymentEl.textContent = mapPayment(pending.payment);
@@ -93,7 +108,6 @@ if (!selectedHall || !pending) {
   }
 }
 
-// Modal wiring
 reserveBtn.addEventListener('click', () => {
   showModal();
 });
@@ -103,7 +117,6 @@ noBtn.addEventListener('click', () => {
 });
 
 yesBtn.addEventListener('click', () => {
-  // Save to bookings (same format as booking.js previously)
   if (selectedHall && pending) {
     const hallName = pending.hallName || selectedHall.name;
     const date = pending.date;
@@ -137,7 +150,6 @@ yesBtn.addEventListener('click', () => {
   window.location.href = 'homepage.html';
 });
 
-// Click outside modal to close
 overlayEl.addEventListener('click', (e) => {
   if (e.target === overlayEl) hideModal();
 });

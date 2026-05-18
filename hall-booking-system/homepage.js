@@ -1,6 +1,3 @@
-// ============================================
-// DATABASE - Real Malaysian Halls with Full Details
-// ============================================
 let allHalls = [];
 async function loadHalls() {
     try {
@@ -15,7 +12,6 @@ async function loadHalls() {
     }
 }
 
-// Location name mapping
 const locationNames = {
     "kl": "Kuala Lumpur",
     "pj": "Petaling Jaya",
@@ -25,7 +21,6 @@ const locationNames = {
     "melaka": "Melaka"
 };
 
-// Score label mapping
 function getScoreLabel(score) {
     if (score >= 9) return "Wonderful";
     if (score >= 8.5) return "Excellent";
@@ -34,15 +29,11 @@ function getScoreLabel(score) {
     return "Pleasant";
 }
 
-// ============================================
-// BOOKING REMINDER - PREMIUM DESIGN
-// ============================================
 function checkReminder() {
     const reminderSection = document.getElementById('booking-reminder');
     const data = JSON.parse(localStorage.getItem('userBooking'));
 
     if (data) {
-        // Calculate days until booking
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const bookingDate = new Date(data.date);
@@ -126,7 +117,6 @@ function checkReminder() {
     }
 }
 
-// Helper function to format payment method
 function formatPayment(method) {
     const map = {
         'online': 'Online Banking (FPX)',
@@ -136,9 +126,6 @@ function formatPayment(method) {
     return map[method] || method;
 }
 
-// ============================================
-// RENDER HALLS - GRID OR LIST VIEW
-// ============================================
 let isSearchActive = false;
 
 function updateVenuesCount(count) {
@@ -161,7 +148,6 @@ function renderHalls(hallsToDisplay) {
         return;
     }
 
-    // Determine view mode based on search/filters
     const searchValue = document.getElementById('searchInput').value.toLowerCase();
     const priceFilter = document.getElementById('priceFilter').value;
     const locFilter = document.getElementById('locationFilter').value;
@@ -169,7 +155,6 @@ function renderHalls(hallsToDisplay) {
 
     isSearchActive = searchValue !== '' || priceFilter !== 'all' || locFilter !== 'all' || rateFilter !== 'all';
 
-    // Update container class
     if (isSearchActive) {
         wrapper.classList.remove('halls-grid');
         wrapper.classList.add('halls-list');
@@ -184,18 +169,13 @@ function renderHalls(hallsToDisplay) {
         const formattedPrice = hall.price.toLocaleString();
 
         if (isSearchActive) {
-            // Horizontal list view (Booking.com style)
             wrapper.innerHTML += createListCard(hall, locationName, scoreLabel, formattedPrice, index);
         } else {
-            // Grid view (default)
             wrapper.innerHTML += createGridCard(hall, locationName, scoreLabel, formattedPrice, index);
         }
     });
 }
 
-// ============================================
-// GRID CARD (Default View)
-// ============================================
 function createGridCard(hall, locationName, scoreLabel, formattedPrice, index) {
     const amenitiesHtml = hall.amenities.slice(0, 3).map(a => `<span class="amenity-tag"><i class="fas fa-check"></i> ${a}</span>`).join('');
     const highlightsHtml = hall.highlights.map(h => `<span class="highlight-tag">${h}</span>`).join('');
@@ -244,9 +224,6 @@ function createGridCard(hall, locationName, scoreLabel, formattedPrice, index) {
     `;
 }
 
-// ============================================
-// LIST CARD (Search Results - Horizontal)
-// ============================================
 function createListCard(hall, locationName, scoreLabel, formattedPrice, index) {
     const amenitiesHtml = hall.amenities.map(a => `<span class="amenity-item"><i class="fas fa-check"></i> ${a}</span>`).join('');
     const highlightsHtml = hall.highlights.map(h => {
@@ -315,9 +292,6 @@ Capacity: Up to ${Number(hall.capacity).toLocaleString()} guests</div>
     `;
 }
 
-// ============================================
-// SAVED HALLS (cross-page favourites)
-// ============================================
 function getSavedHalls() {
     try {
         return JSON.parse(localStorage.getItem('savedHalls')) || [];
@@ -335,12 +309,7 @@ function isHallSaved(hallName) {
     return saved.includes(hallName);
 }
 
-// ============================================
-// HEART BUTTON TOGGLE
-// ============================================
 function toggleHeart(btn) {
-    // We encode hall name on the button so booking.html can share it too.
-    // If missing, fallback to closest card title.
     const hallName = btn.getAttribute('data-hall-name') || (btn.closest('.hall-card, .hall-list-card')?.querySelector('h3, .hall-title, .list-title')?.textContent || '').trim();
     if (!hallName) return;
 
@@ -349,7 +318,6 @@ function toggleHeart(btn) {
 
     const currentlySaved = saved.includes(hallName);
     if (currentlySaved) {
-        // Unsave
         const next = saved.filter(n => n !== hallName);
         setSavedHalls(next);
         icon.classList.remove('fas');
@@ -364,10 +332,6 @@ function toggleHeart(btn) {
     }
 }
 
-
-// ============================================
-// FILTERS & SEARCH
-// ============================================
 function applyFilters() {
     const searchInput = document.getElementById('searchInput');
     const search = (searchInput?.value || '').toLowerCase();
@@ -409,19 +373,14 @@ function applyFilters() {
 
 function filterByLocation(location) {
 
-    // set dropdown filter ikut location
     document.getElementById('locationFilter').value = location;
-
-    // jalan kan filter system sedia ada
     applyFilters();
 
-    // scroll ke results
     document.getElementById('hall-list').scrollIntoView({
         behavior: 'smooth'
     });
 }
 
-// If homepage is opened with ?location=xxx, apply the filter automatically
 function applyLocationFromQuery() {
     const params = new URLSearchParams(window.location.search);
     const location = params.get('location');
@@ -429,22 +388,17 @@ function applyLocationFromQuery() {
     const valid = ['kl', 'pj', 'sa', 'johor', 'penang', 'melaka'];
     if (!valid.includes(location)) return;
 
-    // Ensure DOM is ready and controls exist
     const locationFilter = document.getElementById('locationFilter');
     if (!locationFilter) return;
 
     locationFilter.value = location;
     applyFilters();
 
-    // Scroll to halls list after rendering completes
     setTimeout(() => {
         document.getElementById('hall-list').scrollIntoView({ behavior: 'smooth' });
     }, 100);
 }
 
-// ============================================
-// REDIRECT TO BOOKING
-// ============================================
 function redirectToBooking(name) {
     const selectedHall = allHalls.find(h => h.name === name);
     if (selectedHall) {
@@ -453,17 +407,11 @@ function redirectToBooking(name) {
     window.location.href = `booking.html?hall=${encodeURIComponent(name)}`;
 }
 
-// ============================================
-// WINDOW LOAD
-// ============================================
 window.onload = () => {
     checkReminder();
     loadHalls();
-
-    // Apply location filter if homepage is opened with a query param
     applyLocationFromQuery();
 
-    // Event listeners
     document.getElementById('searchInput').addEventListener('input', applyFilters);
     document.getElementById('priceFilter').addEventListener('change', applyFilters);
     document.getElementById('locationFilter').addEventListener('change', applyFilters);

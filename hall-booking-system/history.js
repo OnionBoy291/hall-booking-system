@@ -1,18 +1,11 @@
-// ============================================
-// HISTORY PAGE - MODERN BOOKING MANAGEMENT
-// ============================================
-
-// 1. Ambil semua bookings dari localStorage
 function getBookings() {
     return JSON.parse(localStorage.getItem('allBookings')) || [];
 }
 
-// 2. Simpan semula ke localStorage
 function saveBookings(bookings) {
     localStorage.setItem('allBookings', JSON.stringify(bookings));
 }
 
-// 3. Check sama ada tarikh booking sudah lepas
 function isPastBooking(dateStr) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -20,19 +13,16 @@ function isPastBooking(dateStr) {
     return bookingDate < today;
 }
 
-// 4. Format date to readable string
 function formatDate(dateStr) {
     const date = new Date(dateStr);
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-MY', options);
 }
 
-// 5. Generate booking reference
 function generateRef(index) {
     return 'HB-' + String(index + 1).padStart(4, '0');
 }
 
-// 6. Get hall image by name (same as homepage)
 function getHallImage(hallName) {
     const hallImages = {
         'KL Convention Centre': 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Kuala_Lumpur_Convention_Centre_%28northeastern_exterior%29%2C_Kuala_Lumpur.jpg',
@@ -46,7 +36,6 @@ function getHallImage(hallName) {
     return hallImages[hallName] || 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Kuala_Lumpur_Convention_Centre_%28northeastern_exterior%29%2C_Kuala_Lumpur.jpg';
 }
 
-// 7. Get hall price by name (same as homepage)
 function getHallPrice(hallName) {
     const hallPrices = {
         'KL Convention Centre': 1500,
@@ -60,19 +49,29 @@ function getHallPrice(hallName) {
     return hallPrices[hallName] || 1000;
 }
 
-// 8. Update stats with animated circles
+function formatHallCityMalaysia(hallName) {
+    if (!hallName) return 'Malaysia';
+    if (hallName.includes('Kuala Lumpur') || hallName.includes('KL ')) return 'Kuala Lumpur, Malaysia';
+    if (hallName.includes('Petaling') || hallName.includes('Sunway')) return 'Petaling Jaya, Malaysia';
+    if (hallName.includes('Shah Alam')) return 'Shah Alam, Malaysia';
+    if (hallName.includes('Johor Bahru') || hallName.includes('Persada Johor')) return 'Johor Bahru, Malaysia';
+    if (hallName.includes('Penang') || hallName.includes('SPICE Arena')) return 'Penang, Malaysia';
+    if (hallName.includes('Melaka') || hallName.includes('Hang Tuah')) return 'Melaka, Malaysia';
+
+    return 'Malaysia';
+}
+
+
 function updateStats() {
     const bookings = getBookings();
     const total = bookings.length;
     const upcoming = bookings.filter(b => !isPastBooking(b.date)).length;
     const completed = bookings.filter(b => isPastBooking(b.date)).length;
 
-    // Animate numbers
     animateNumber('totalBookings', total);
     animateNumber('upcomingBookings', upcoming);
     animateNumber('completedBookings', completed);
 
-    // Update circle progress
     if (total > 0) {
         setCircleProgress('totalCircle', 100);
         setCircleProgress('upcomingCircle', (upcoming / total) * 100);
@@ -83,14 +82,12 @@ function updateStats() {
         setCircleProgress('completedCircle', 0);
     }
 
-    // Update booking count label
     const countLabel = document.getElementById('bookingCount');
     if (countLabel) {
         countLabel.innerText = `${total} booking${total !== 1 ? 's' : ''}`;
     }
 }
 
-// 9. Animate number counting
 function animateNumber(elementId, target) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -115,7 +112,6 @@ function animateNumber(elementId, target) {
     requestAnimationFrame(update);
 }
 
-// 10. Set SVG circle progress
 function setCircleProgress(elementId, percentage) {
     const circle = document.getElementById(elementId);
     if (!circle) return;
@@ -123,7 +119,6 @@ function setCircleProgress(elementId, percentage) {
     circle.setAttribute('stroke-dasharray', `${value}, 100`);
 }
 
-// 11. Delete/Cancel booking
 function cancelBooking(index) {
     const bookings = getBookings();
     const hallName = bookings[index].hallName;
@@ -133,7 +128,6 @@ function cancelBooking(index) {
         bookings.splice(index, 1);
         saveBookings(bookings);
 
-        // Update userBooking jika yang latest dah padam
         const latest = JSON.parse(localStorage.getItem('userBooking'));
         if (latest && latest.hallName === hallName && latest.date === date) {
             const newLatest = bookings[bookings.length - 1] || null;
@@ -148,17 +142,14 @@ function cancelBooking(index) {
     }
 }
 
-// 12. Render bookings with filter
 let currentFilter = 'all';
 
 function renderBookings() {
     const container = document.getElementById('bookings-list');
     const bookings = getBookings();
 
-    // Update stats
     updateStats();
 
-    // Filter bookings
     let filteredBookings = bookings;
     if (currentFilter === 'upcoming') {
         filteredBookings = bookings.filter(b => !isPastBooking(b.date));
@@ -196,7 +187,6 @@ function renderBookings() {
             ? `<span class="decoration-yes"><i class="fas fa-check-circle"></i> Yes (${b.theme || 'No theme'})</span>`
             : `<span class="decoration-no"><i class="fas fa-times-circle"></i> No</span>`;
 
-        // Find original index for cancel function
         const originalIndex = bookings.findIndex(booking => 
             booking.hallName === b.hallName && 
             booking.date === b.date && 
@@ -217,10 +207,9 @@ function renderBookings() {
                             <h3>${b.hallName}</h3>
                             <div class="card-location">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>${b.hallName.includes('Kuala Lumpur') ? 'Kuala Lumpur' : 
-                                       b.hallName.includes('Petaling') ? 'Petaling Jaya' : 
-                                       b.hallName.includes('Shah Alam') ? 'Shah Alam' : 'Malaysia'}</span>
+                                <span>${formatHallCityMalaysia(b.hallName)}</span>
                             </div>
+
                         </div>
                         <div class="status-badge ${statusClass}">
                             <span class="status-dot"></span>
@@ -275,7 +264,6 @@ function renderBookings() {
     }).join('');
 }
 
-// 13. Format payment method untuk display yang lebih cantik
 function formatPayment(method) {
     const map = {
         'online': 'Online Banking (FPX)',
@@ -285,24 +273,18 @@ function formatPayment(method) {
     return map[method] || method;
 }
 
-// 14. Tab filter functionality
 function setupTabs() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active from all
             tabBtns.forEach(b => b.classList.remove('active'));
-            // Add active to clicked
             btn.classList.add('active');
-            // Update filter
             currentFilter = btn.dataset.filter;
-            // Re-render
             renderBookings();
         });
     });
 }
 
-// 15. Load on page ready
 window.onload = () => {
     renderBookings();
     setupTabs();

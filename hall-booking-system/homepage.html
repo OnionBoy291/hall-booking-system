@@ -11,7 +11,6 @@
 </head>
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -26,7 +25,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="“the_garden”_event_venue_(pre-con_virtual_tour).mp4" type="video/mp4">
@@ -44,10 +42,8 @@
                 
     </section>
 
-    <!-- Booking Reminder -->
     <section id="booking-reminder" class="reminder-container"></section>
 
-    <!-- News & Promotions Marquee -->
     <section class="news-section">
         <div class="news-header">
             <div class="news-title-block">
@@ -144,7 +140,6 @@
             </div>
     </section>
 
-     <!-- Filters Section -->
     <section class="filters-section">
         <div class="filters-container">
             <div class="filter-item">
@@ -191,7 +186,6 @@
                 </select>
             </div>
 
-            <!-- Search (moved from hero) -->
             <div class="search-bar">
                 <div class="search-item">
                     <i class="fas fa-search"></i>
@@ -201,8 +195,6 @@
             </div>
     </section>
 
-
-    <!-- Halls Section -->
     <section class="halls-section">
         <div class="section-header">
             <h2>Popular Halls in Malaysia</h2>
@@ -212,7 +204,6 @@
         <div class="halls-grid" id="hall-list"></div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -225,15 +216,15 @@
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="about.html#contact-section">Contact</a></li>
 
-                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Locations</h4>
                 <ul>
-                    <li><a href="#" onclick="filterByLocation('kl')">Kuala Lumpur</a></li>
-                    <li><a href="#" onclick="filterByLocation('penang')">Penang</a></li>
-                    <li><a href="#" onclick="filterByLocation('johor')">Johor Bahru</a></li>
+                    <li><a href="#" onclick="filterByLocation('kl'); window.location.href='homepage.html?location=kl'">Kuala Lumpur</a></li>
+                    <li><a href="#" onclick="filterByLocation('penang'); window.location.href='homepage.html?location=penang'">Penang</a></li>
+                    <li><a href="#" onclick="filterByLocation('johor'); window.location.href='homepage.html?location=johor'">Johor Bahru</a></li>
                 </ul>
             </div>
         <div class="footer-bottom">
@@ -243,5 +234,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="homepage.js"></script>
+    <script src="accessibility.js"></script>
 </body>
 </html>
