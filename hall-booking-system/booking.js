@@ -112,6 +112,7 @@ function getSavedHalls() {
     }
 }
 
+
 function setSavedHalls(halls) {
     localStorage.setItem('savedHalls', JSON.stringify(halls));
 }
@@ -193,7 +194,8 @@ bookingForm.addEventListener('submit', function(e) {
 
 const shareButton = document.getElementById("shareBtn");
 
-shareButton.addEventListener("click", async () => {
+if (shareButton) shareButton.addEventListener("click", async () => {
+
   const shareData = {
     title: hallName ? `${hallName}` : "Hall Booking",
     text: hallName ? `Check out ${hallName} for your event!` : "Check out this hall for your event!",

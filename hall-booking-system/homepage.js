@@ -85,7 +85,8 @@ function checkReminder() {
                             </div>
                             <div class="reminder-meta-item">
                                 <i class="fas fa-credit-card"></i>
-                                <span>${formatPayment(data.payment)}</span>
+                        ${bbFormatPayment(data.payment)}
+
                             </div>
                         </div>
                         ${countdownHtml}
@@ -324,7 +325,6 @@ function toggleHeart(btn) {
         icon.classList.add('far');
         btn.style.color = '';
     } else {
-        // Save
         setSavedHalls([...saved, hallName]);
         icon.classList.remove('far');
         icon.classList.add('fas');

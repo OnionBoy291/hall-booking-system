@@ -231,7 +231,7 @@ function renderBookings() {
                         </div>
                         <div class="detail-item">
                             <label><i class="fas fa-credit-card"></i> Payment</label>
-                            <span>${formatPayment(b.payment)}</span>
+${bbFormatPayment(b.payment)}
                         </div>
                         <div class="detail-item">
                             <label><i class="fas fa-paint-brush"></i> Decoration</label>
