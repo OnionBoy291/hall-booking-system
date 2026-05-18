@@ -324,7 +324,6 @@ function toggleHeart(btn) {
         icon.classList.add('far');
         btn.style.color = '';
     } else {
-        // Save
         setSavedHalls([...saved, hallName]);
         icon.classList.remove('far');
         icon.classList.add('fas');
